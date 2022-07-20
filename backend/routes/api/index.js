@@ -6,29 +6,20 @@ const {
   requireAuth,
 } = require("../../utils/auth.js");
 const usersRouter = require("./users.js");
-const sessionRouter = require("./session.js");
 const { User } = require("../../db/models");
 
-// router.get("/set-token-cookie", async (_req, res) => {
-//   const user = await User.findOne({
-//     where: {
-//       username: "Demo-lition",
-//     },
-//   });
-//   setTokenCookie(res, user);
-//   return res.json({ user });
-// });
-
-// router.get("/restore-user", restoreUser, (req, res) => {
-//   return res.json(req.user);
-// });
-
-// router.get("/require-auth", requireAuth, (req, res) => {
-//   return res.json(req.user);
-// });
-
-router.use("/session", sessionRouter);
 router.use("/users", usersRouter);
+
+//Restore User Session
+router.get("/", restoreUser, (req, res) => {
+  res.send("Welcome to Airbnb");
+  const { user } = req;
+  if (user) {
+    return res.json({
+      user: user.toSafeObject(),
+    });
+  } else return res.json({});
+});
 
 // Add a XSRF-TOKEN cookie
 router.get("/csrf/restore", (req, res) => {

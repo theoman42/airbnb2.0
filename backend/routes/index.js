@@ -1,12 +1,9 @@
 // backend/routes/index.js
 const express = require("express");
 const router = express.Router();
+const { restoreUser } = require("../utils/auth");
 const apiRouter = require("./api");
 
-router.get("/", (req, res) => {
-  res.send("Welcome to Airbnb");
-});
-
-router.use("/api", apiRouter);
+router.use(apiRouter);
 
 module.exports = router;
