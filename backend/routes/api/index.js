@@ -6,9 +6,11 @@ const {
   requireAuth,
 } = require("../../utils/auth.js");
 const usersRouter = require("./users.js");
+const spotsRouter = require("./spots.js");
 const { User } = require("../../db/models");
 
 router.use("/users", usersRouter);
+router.use("/spots", spotsRouter);
 
 //Restore User Session
 router.get("/", restoreUser, (req, res) => {
