@@ -2,7 +2,7 @@
 
 ## Database Schema Design
 
-<!-- ![Alt text](./images/image.png?raw=true "Title") -->
+![Alt text](./images/image.png?raw=true "Title")
 
 ## API Documentation
 
