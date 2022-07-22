@@ -128,7 +128,7 @@ router.get("/:spotId", async (req, res) => {
       {
         model: Image,
         as: "images",
-        attributes: ["url"],
+        attributes: ["url", "url"],
       },
       {
         model: User,
