@@ -60,8 +60,18 @@ const requireAuth = [
   },
 ];
 
-// const hasPermission = (req, res, next) => {
-//   if (req.user) return next();
+// const properAuthorization = (userId, itemUserId) => {
+//   if (userId != itemUserId) {
+//     const err = new Error("Forbidden");
+//     err.status = 403;
+//     return err;
+//   }
+//   return null;
 // };
 
-module.exports = { setTokenCookie, restoreUser, requireAuth };
+module.exports = {
+  setTokenCookie,
+  restoreUser,
+  requireAuth,
+  //properAuthorization,
+};
