@@ -9,6 +9,7 @@ const {
 } = require("../../utils/auth");
 const { check } = require("express-validator");
 const {
+  searchValidation,
   handleValidationErrors,
   validateSpotBody,
   validateReviewBody,
@@ -449,7 +450,6 @@ router.get("/", async (req, res) => {
 });
 
 //DELETE SPOT
-
 router.delete("/:spotId", requireAuth, async (req, res) => {
   const { user } = req;
   let { spotId } = req.params;
@@ -481,6 +481,75 @@ router.delete("/:spotId", requireAuth, async (req, res) => {
     message: "Succesfully Deleted",
     statusCode: 200,
   });
+});
+
+//SEARCH
+router.get("/search", searchValidation, async (req, res) => {
+  let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } =
+    req.query;
+
+  if (!size) size = 20;
+  if (!page) page = 0;
+
+  page = parseInt(page);
+  size = parseInt(size);
+
+  page > 10 ? (page = 0) : (page = page);
+  size > 20 ? (size = 20) : (size = size);
+
+  let where = {};
+
+  //LATTITUDE
+  if (minLat) {
+    where.lat = {
+      [Op.gte]: minLat,
+    };
+  }
+
+  if (maxLat) {
+    where.lat = {
+      [Op.lte]: maxLat,
+    };
+  }
+  // LONGITUDE
+  if (minLng) {
+    where.lng = {
+      [Op.gte]: minLng,
+    };
+  }
+
+  if (maxLng) {
+    where.lng = {
+      [Op.lte]: maxLng,
+    };
+  }
+
+  // PRICE
+  if (minPrice) {
+    where.price = {
+      [Op.gte]: minPrice,
+    };
+  }
+
+  if (maxPrice) {
+    where.price = {
+      [Op.lte]: maxPrice,
+    };
+  }
+
+  const Spots = await Spot.findAll({
+    where: { ...where },
+    include: [
+      {
+        model: Image,
+        as: "images",
+        attributes: ["url"],
+      },
+    ],
+  });
+
+  res.status(200);
+  return res.json({ Spots, page, size });
 });
 
 module.exports = router;

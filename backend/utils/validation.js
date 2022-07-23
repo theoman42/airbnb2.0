@@ -57,8 +57,45 @@ const validateReviewBody = [
   handleValidationErrors,
 ];
 
+const searchValidation = [
+  check("page")
+    .isInt({ min: 0 })
+    // .optional({ nullable: true })
+    .withMessage("Page must be greater than or equal to 0"),
+  check("size")
+    .isInt({ min: 0 })
+    // .optional({ nullable: true })
+    .withMessage("Size must be greater than or equal to 0"),
+  check("maxLat")
+    // .isLatLong()
+    .isDecimal()
+    .withMessage("Maximum latitude is invalid"),
+  check("minLat")
+    // .isLatLong()
+    .isDecimal()
+    .withMessage("Minimum latitude is invalid"),
+  check("maxLong")
+    // .isLatLong()
+    .isDecimal()
+    .withMessage("Maximum longitude is invalid"),
+  check("minLong")
+    // .isLatLong()
+    .isDecimal()
+    .withMessage("Minimum longitude is invalid"),
+  check("minPrice")
+    .isDecimal({ min: 0 })
+    // .optional({ nullable: true })
+    .withMessage("Page must be greater than or equal to 0"),
+  check("maxPrice")
+    .isDecimal({ min: 0 })
+    // .optional({ nullable: true })
+    .withMessage("Size must be greater than or equal to 0"),
+  handleValidationErrors,
+];
+
 module.exports = {
   handleValidationErrors,
   validateSpotBody,
   validateReviewBody,
+  searchValidation,
 };
