@@ -406,7 +406,7 @@ router.get("/:spotId", async (req, res) => {
   spotId = parseInt(spotId);
   const spot = await Spot.findOne({
     where: {
-      id,
+      id: spotId,
     },
     attributes: {
       exclude: ["previewImage"],
