@@ -11,8 +11,13 @@ const { handleValidationErrors } = require("../../utils/validation");
 
 const router = express.Router();
 
+//GET ALL REVIEWS WRITTEN BY CURRENT USER
 router.get("/", requireAuth, async (req, res) => {
-  const reviews = await Review.findAll({
+  const { user } = req;
+  const Reviews = await Review.findAll({
+    where: {
+      userId: user.id,
+    },
     include: [
       {
         model: User,
@@ -24,7 +29,46 @@ router.get("/", requireAuth, async (req, res) => {
       },
     ],
   });
-  res.json({ reviews });
+  res.json({ Reviews });
+});
+
+//Add an Image to a REVIEW based on the REVIEW's ID
+router.post("/:reviewId/images", requireAuth, async (req, res) => {
+  const { user } = req;
+  const { url } = req.body;
+  let { reviewId } = req.params;
+  reviewId = parseInt(reviewId);
+
+  const reviewExist = await Review.findOne({
+    where: { id: reviewId },
+  });
+
+  if (!reviewExist) {
+    const err = new Error("Review couldn't be found");
+    err.status = 404;
+    throw err;
+  }
+
+  if (reviewExist.userId !== user.id) {
+    let error = new Error("Forbidden");
+    error.status = 403;
+    throw error;
+  }
+
+  const newImage = await Image.create({
+    imageableId: user.id,
+    spotId: null,
+    reviewId,
+    url,
+    imageType: "Review",
+  });
+
+  res.json({
+    id: newImage.id,
+    imageableId: user.id,
+    imageableType: "Review",
+    url: newImage.url,
+  });
 });
 
 module.exports = router;

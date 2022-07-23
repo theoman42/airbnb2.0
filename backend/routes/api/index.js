@@ -8,11 +8,14 @@ const {
 const usersRouter = require("./users.js");
 const spotsRouter = require("./spots.js");
 const reviewsRouter = require("./reviews.js");
-const { User } = require("../../db/models");
+const bookingsRouter = require("./bookings.js");
+const imagesRouter = require("./images.js");
 
 router.use("/users", usersRouter);
 router.use("/spots", spotsRouter);
 router.use("/reviews", reviewsRouter);
+router.use("/bookings", bookingsRouter);
+router.use("/images", imagesRouter);
 
 //Restore User Session
 router.get("/", restoreUser, (req, res) => {

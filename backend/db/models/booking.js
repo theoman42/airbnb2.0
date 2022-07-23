@@ -1,5 +1,6 @@
 "use strict";
 const { Model } = require("sequelize");
+const { User } = require("../../db/models");
 module.exports = (sequelize, DataTypes) => {
   class Booking extends Model {
     /**
@@ -34,11 +35,11 @@ module.exports = (sequelize, DataTypes) => {
       },
       startDate: {
         allowNull: false,
-        type: DataTypes.DATE,
+        type: DataTypes.DATEONLY,
       },
       endDate: {
         allowNull: false,
-        type: DataTypes.DATE,
+        type: DataTypes.DATEONLY,
       },
       createdAt: {
         allowNull: false,
@@ -52,6 +53,20 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: "Booking",
+      defaultScope: {
+        attributes: {
+          exclude: ["id", "userId", "createdAt", "updatedAt"],
+        },
+      },
+      scopes: {
+        owner: {
+          // include: [
+          //   {
+          //     model: User,
+          //   },
+          // ],
+        },
+      },
     }
   );
   return Booking;
