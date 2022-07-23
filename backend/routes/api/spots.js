@@ -436,7 +436,7 @@ router.get("/:spotId", async (req, res) => {
     // ],
   });
 
-  if (!spot.length) {
+  if (!spot.id) {
     const err = new Error("Spot couldn't be found");
     err.status = 404;
     throw err;
