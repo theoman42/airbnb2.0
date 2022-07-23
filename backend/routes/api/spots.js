@@ -412,13 +412,13 @@ router.get("/:spotId", async (req, res) => {
       exclude: ["previewImage"],
     },
     include: [
-      //   {
-      //     model: Review,
-      //     attributes: [
-      //       [sequelize.fn("COUNT", sequelize.col("review")), "numReviews"],
-      //       [sequelize.fn("AVG", sequelize.col("stars")), "avgStarRating"],
-      //     ],
-      //   },
+      {
+        model: Review,
+        attributes: [
+          [sequelize.fn("COUNT", sequelize.col("review")), "numReviews"],
+          [sequelize.fn("AVG", sequelize.col("stars")), "avgStarRating"],
+        ],
+      },
       {
         model: Image,
         as: "images",
