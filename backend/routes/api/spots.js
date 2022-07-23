@@ -411,31 +411,32 @@ router.get("/:spotId", async (req, res) => {
     attributes: {
       exclude: ["previewImage"],
     },
-    include: [
-      {
-        model: Review,
-        attributes: [
-          [sequelize.fn("COUNT", sequelize.col("review")), "numReviews"],
-          [sequelize.fn("AVG", sequelize.col("stars")), "avgStarRating"],
-        ],
-      },
-      {
-        model: Image,
-        as: "images",
-        attributes: ["url", "url"],
-      },
-      {
-        model: User,
-        as: "Owner",
-        attributes: [
-          ["id", "id"],
-          ["firstName", "firstName"],
-          ["lastName", "lastName"],
-        ],
-      },
-    ],
+    // include: [
+    //   {
+    //     model: Review,
+    //     attributes: [
+    //       [sequelize.fn("COUNT", sequelize.col("review")), "numReviews"],
+    //       [sequelize.fn("AVG", sequelize.col("stars")), "avgStarRating"],
+    //     ],
+    //   },
+    //   {
+    //     model: Image,
+    //     as: "images",
+    //     attributes: ["url", "url"],
+    //   },
+    //   {
+    //     model: User,
+    //     as: "Owner",
+    //     attributes: [
+    //       ["id", "id"],
+    //       ["firstName", "firstName"],
+    //       ["lastName", "lastName"],
+    //     ],
+    //   },
+    // ],
   });
-  if (!spot.id) {
+
+  if (!spot.length) {
     const err = new Error("Spot couldn't be found");
     err.status = 404;
     throw err;
