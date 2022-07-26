@@ -412,13 +412,13 @@ router.get("/:spotId", async (req, res) => {
       exclude: ["previewImage"],
     },
     include: [
-      {
-        model: Review,
-        attributes: [
-          [sequelize.fn("COUNT", sequelize.col("review")), "numReviews"],
-          [sequelize.fn("AVG", sequelize.col("stars")), "avgStarRating"],
-        ],
-      },
+      // {
+      //   model: Review,
+      //   attributes: [
+      //     [sequelize.fn("COUNT", sequelize.col("review")), "numReviews"],
+      //     [sequelize.fn("AVG", sequelize.col("stars")), "avgStarRating"],
+      //   ],
+      // },
       {
         model: Image,
         as: "images",
@@ -435,6 +435,22 @@ router.get("/:spotId", async (req, res) => {
       },
     ],
   });
+
+  const temp = await Spot.findByPk(spotId, {
+    include: [
+      {
+        model: Review,
+      },
+    ],
+  });
+  let reviewCount = temp.Reviews.length;
+  let sum = 0;
+  temp.Reviews.forEach((r) => {
+    sum = sum + r.stars;
+  });
+
+  spot.dataValues.avgStarRating = sum / reviewCount;
+  spot.dataValues.numReviews = reviewCount;
 
   if (!spot.id) {
     const err = new Error("Spot couldn't be found");
