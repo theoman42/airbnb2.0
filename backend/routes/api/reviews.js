@@ -71,4 +71,35 @@ router.post("/:reviewId/images", requireAuth, async (req, res) => {
   });
 });
 
+//DELETE A REVIEW
+router.delete("/:reviewId", requireAuth, async (req, res) => {
+  const { user } = req;
+  let { reviewId } = req.params;
+  reviewId = parseInt(reviewId);
+
+  const reviewExist = await Review.findOne({
+    where: {
+      id: reviewId,
+    },
+  });
+
+  if (!reviewExist) {
+    const err = new Error("Review couldn't be found");
+    err.status = 404;
+    throw err;
+  }
+
+  if (reviewExist.userId !== user.id) {
+    const err = new Error("Forbidden");
+    err.status = 403;
+    throw err;
+  }
+
+  await reviewExist.destroy();
+  res.json({
+    message: "Succesfully deleted",
+    statusCode: 200,
+  });
+});
+
 module.exports = router;

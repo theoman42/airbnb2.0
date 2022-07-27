@@ -164,7 +164,19 @@ router.post("/:spotId/bookings", requireAuth, async (req, res) => {
 router.get("/:spotId/reviews", async (req, res) => {
   let { spotId } = req.params;
   spotId = parseInt(spotId);
-  const reviews = await Review.findAll({
+
+  const spotExist = await Spot.findOne({
+    where: {
+      id: spotId,
+    },
+  });
+  if (!spotExist) {
+    const err = new Error("Spot couldn't be found");
+    err.status = 404;
+    throw err;
+  }
+
+  const Reviews = await Review.findAll({
     where: {
       spotId,
     },
@@ -184,7 +196,12 @@ router.get("/:spotId/reviews", async (req, res) => {
       },
     ],
   });
-  res.json({ reviews });
+  if (!Reviews.length) {
+    const err = new ERROR("Spot couldn't be found");
+    err.status = 404;
+    throw err;
+  }
+  res.json({ Reviews });
 });
 
 //CREATE A REVIEW For SPOT Based on ID
@@ -281,35 +298,6 @@ router.put(
   }
 );
 
-//DELETE A REVIEW
-router.delete("/:spotId/reviews/:reviewId", requireAuth, async (req, res) => {
-  const { user } = req;
-  let { spotId, reviewId } = req.params;
-  spotId = parseInt(spotId);
-  reviewId = parseInt(reviewId);
-
-  const reviewExist = await Review.findOne({
-    where: {
-      id: reviewId,
-      spotId,
-    },
-  });
-
-  if (!reviewExist) {
-    const err = new Error("Review couldn't be found");
-    err.status = 404;
-    throw err;
-  }
-
-  if (reviewExist.userId !== user.id) {
-    const err = new Error("Forbidden");
-    err.status = 403;
-    throw err;
-  }
-
-  await reviewExist.destroy;
-  throw err;
-});
 
 //CREATE A NEW SPOT
 router.post("/", requireAuth, validateSpotBody, async (req, res) => {
@@ -412,13 +400,6 @@ router.get("/:spotId", async (req, res) => {
       exclude: ["previewImage"],
     },
     include: [
-      // {
-      //   model: Review,
-      //   attributes: [
-      //     [sequelize.fn("COUNT", sequelize.col("review")), "numReviews"],
-      //     [sequelize.fn("AVG", sequelize.col("stars")), "avgStarRating"],
-      //   ],
-      // },
       {
         model: Image,
         as: "images",
@@ -436,6 +417,12 @@ router.get("/:spotId", async (req, res) => {
     ],
   });
 
+  if (!spot) {
+    const err = new Error("Spot couldn't be found");
+    err.status = 404;
+    throw err;
+  }
+
   const temp = await Spot.findByPk(spotId, {
     include: [
       {
@@ -443,6 +430,7 @@ router.get("/:spotId", async (req, res) => {
       },
     ],
   });
+
   let reviewCount = temp.Reviews.length;
   let sum = 0;
   temp.Reviews.forEach((r) => {
@@ -452,11 +440,6 @@ router.get("/:spotId", async (req, res) => {
   spot.dataValues.avgStarRating = sum / reviewCount;
   spot.dataValues.numReviews = reviewCount;
 
-  if (!spot.id) {
-    const err = new Error("Spot couldn't be found");
-    err.status = 404;
-    throw err;
-  }
   res.json(spot);
 });
 
