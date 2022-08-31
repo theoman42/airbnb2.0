@@ -14,7 +14,6 @@ export const load = (spots) => {
 
 export const getSpots = () => async (dispatch) => {
   const res = await csrfFetch("/spots");
-  console.log("hi");
 
   if (res.ok) {
     const allSpots = await res.json();
@@ -22,15 +21,21 @@ export const getSpots = () => async (dispatch) => {
   }
 };
 
-const spotReducer = (state = {}.action) => {
-  let newState;
+const initialState = { spots: null };
+const spotReducer = (state = initialState, action) => {
   switch (action.type) {
+    case LOAD:
+      const spots = {};
+      action.payload.spots.forEach((spot) => {
+        spots[spot.id] = spot;
+      });
+      return { ...state, spots };
     case ADD_SPOT:
-      return newState;
+      return state;
     case EDIT_SPOT:
-      return newState;
+      return state;
     case DELETE_SPOT:
-      return newState;
+      return state;
     default:
       return state;
   }
