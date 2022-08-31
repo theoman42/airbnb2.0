@@ -1,7 +1,7 @@
-import React, { useEffect, useStat, Navlink } from "react";
+import React, { useEffect, useStat } from "react";
 import * as sessionActions from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, NavLink } from "react-router-dom";
 import "./Spots.css";
 import { getSpots } from "../../store/spots";
 
@@ -9,7 +9,6 @@ const SpotsPage = () => {
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.session.user);
   const spots = Object.values(useSelector((state) => state.spots));
-  console.log(spots);
   useEffect(() => {
     dispatch(getSpots());
   }, [dispatch]);
@@ -17,11 +16,19 @@ const SpotsPage = () => {
   //map through all spots
   return (
     <main>
-      <nav>
+      <div className="grid-container">
         {spots.map((spot) => {
-          <div>hi</div>;
+          return (
+            <NavLink
+              key={spot.id}
+              to={`/spots/${spot.id}`}
+              className="grid-item"
+            >
+              <div className="">{spot.id}</div>
+            </NavLink>
+          );
         })}
-      </nav>
+      </div>
     </main>
   );
 };

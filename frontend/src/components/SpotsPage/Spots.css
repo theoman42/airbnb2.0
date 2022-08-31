@@ -1,0 +1,13 @@
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(5, 320px);
+  grid-auto-rows: 200px;
+  border-radius: 10px;
+  margin-left: 50px;
+  margin-right: 50px;
+  background-color: black;
+}
+
+.grid-item {
+  background-color: green;
+}
