@@ -1,4 +1,4 @@
-import React, { useEffect, useStat } from "react";
+import React, { useEffect, useState } from "react";
 import * as sessionActions from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, NavLink } from "react-router-dom";
@@ -12,28 +12,40 @@ const SpotsPage = () => {
   useEffect(() => {
     dispatch(getSpots());
   }, [dispatch]);
+
+  //'null', 'addForm', 'editForm'
+  const [showForm, setShowForm] = useState("none");
+
   //Retrieve an array of all spots;
   //map through all spots
   return (
     <main>
-      <div className="grid-container">
-        {spots.map((spot) => {
-          return (
-            <NavLink
-              key={spot.id}
-              to={`/spots/${spot.id}`}
-              className="grid-item"
-            >
-              <img src="google.com/images" alt="airbnb-spot" />
-              <div className="spot-descriptions-grid">
-                <div className="description-item-1">{`${spot.city}, ${spot.country}`}</div>
-                <div className="description-item-2">{`$${spot.price} night`}</div>
-                <div className="description-item-3">{`Stars`}</div>
-              </div>
-            </NavLink>
-          );
-        })}
-      </div>
+      <nav>
+        <button hidden={showForm} onClick={() => setShowForm(true)} />
+        <div className="grid-container">
+          {spots.map((spot) => {
+            return (
+              <NavLink
+                key={spot.id}
+                to={`/spots/${spot.id}`}
+                className="grid-item"
+              >
+                <img src="google.com/images" alt="airbnb-spot" />
+                <div className="spot-descriptions-grid">
+                  <div className="description-item-1">{`${spot.city}, ${spot.country}`}</div>
+                  <div className="description-item-2">{`$${spot.price} night`}</div>
+                  <div className="description-item-3">{`Stars`}</div>
+                </div>
+              </NavLink>
+            );
+          })}
+        </div>
+        {showForm ? (
+          <div hideForm={() => setShowForm(false)}> </div>
+        ) : (
+          <div>hi</div>
+        )}
+      </nav>
     </main>
   );
 };

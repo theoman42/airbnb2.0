@@ -11,17 +11,23 @@
 
 .grid-item {
   display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   background-color: rgb(240, 240, 240);
   border-radius: 10px;
+  padding: 10px;
 }
 
 .spot-descriptions-grid {
   display: grid;
-
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: 2.0em;
   gap: 10px;
   color: black;
+}
+
+.description-items {
+
 }
 
 .description-item-1 {
@@ -37,4 +43,5 @@
 .description-item-3 {
   grid-column: 2;
   grid-row: 1;
+  text-align: end;
 }
