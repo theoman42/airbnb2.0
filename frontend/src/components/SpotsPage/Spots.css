@@ -1,13 +1,40 @@
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(5, 320px);
-  grid-auto-rows: 200px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-gap: 30px;
+  grid-auto-rows: 300px;
+  margin-left: 20px;
+  margin-right: 20px;
   border-radius: 10px;
-  margin-left: 50px;
-  margin-right: 50px;
-  background-color: black;
+  padding: 20px;
 }
 
 .grid-item {
-  background-color: green;
+  display: flex;
+  background-color: rgb(240, 240, 240);
+  border-radius: 10px;
+}
+
+.spot-descriptions-grid {
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 2.0em;
+  gap: 10px;
+  color: black;
+}
+
+.description-item-1 {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.description-item-2 {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.description-item-3 {
+  grid-column: 2;
+  grid-row: 1;
 }

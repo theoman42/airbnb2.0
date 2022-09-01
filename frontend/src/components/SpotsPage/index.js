@@ -24,7 +24,12 @@ const SpotsPage = () => {
               to={`/spots/${spot.id}`}
               className="grid-item"
             >
-              <div className="">{spot.id}</div>
+              <img src="google.com/images" alt="airbnb-spot" />
+              <div className="spot-descriptions-grid">
+                <div className="description-item-1">{`${spot.city}, ${spot.country}`}</div>
+                <div className="description-item-2">{`$${spot.price} night`}</div>
+                <div className="description-item-3">{`Stars`}</div>
+              </div>
             </NavLink>
           );
         })}
