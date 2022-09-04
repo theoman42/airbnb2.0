@@ -1,12 +1,13 @@
+.spots-page-wrapper {
+  padding: 20px;
+}
+
 .grid-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   grid-gap: 30px;
   grid-auto-rows: 300px;
-  margin-left: 20px;
-  margin-right: 20px;
   border-radius: 10px;
-  padding: 20px;
 }
 
 .grid-item {

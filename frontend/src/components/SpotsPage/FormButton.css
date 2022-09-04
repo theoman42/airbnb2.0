@@ -1,0 +1,26 @@
+.form-button-wrapper {
+  display: flex;
+  padding: 10px;
+}
+
+.form-button {
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgb(0, 0, 0, 0.3);
+  display: flex;
+  cursor: pointer;
+  width: 100px;
+  padding: 5px;
+  margin: 2px;
+}
+
+.add-spot {
+  color: white;
+  background-color: #FF5A5F;
+}
+
+.edit-spot {
+  color: #FF5A5F;
+  background-color: white;
+}

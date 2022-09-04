@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect, NavLink } from "react-router-dom";
 import "./Spots.css";
 import { getSpots } from "../../store/spots";
+import FormButtons from "./FormButton";
+import SpotsForm from "./SpotsForm";
 
 const SpotsPage = () => {
   const dispatch = useDispatch();
@@ -14,14 +16,13 @@ const SpotsPage = () => {
   }, [dispatch]);
 
   //'null', 'addForm', 'editForm'
-  const [showForm, setShowForm] = useState("none");
+  const [showForm, setShowForm] = useState(false);
 
   //Retrieve an array of all spots;
   //map through all spots
   return (
     <main>
-      <nav>
-        <button hidden={showForm} onClick={() => setShowForm(true)} />
+      <div className="spots-page-wrapper">
         <div className="grid-container">
           {spots.map((spot) => {
             return (
@@ -40,12 +41,7 @@ const SpotsPage = () => {
             );
           })}
         </div>
-        {showForm ? (
-          <div hideForm={() => setShowForm(false)}> </div>
-        ) : (
-          <div>hi</div>
-        )}
-      </nav>
+      </div>
     </main>
   );
 };

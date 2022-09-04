@@ -1,34 +1,31 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
+import logo from "../../images/logo.png";
+import LoginFormModal from "../LoginFormModal";
+import DemoLogin from "./DemoLogin";
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
+  const history = useHistory();
 
-  let sessionLinks;
-  if (sessionUser) {
-    sessionLinks = <ProfileButton user={sessionUser} />;
-  } else {
-    sessionLinks = (
-      <>
-        <NavLink to="/login">Log In</NavLink>
-        <NavLink to="/signup">Sign Up</NavLink>
-      </>
-    );
-  }
+  const goHome = () => {
+    history.push(`/`);
+  };
 
   return (
-    <ul>
-      <li>
-        <NavLink exact to="/">
-          Home
-        </NavLink>
-        {isLoaded && sessionLinks}
-        <NavLink to="/spots">Spots</NavLink>
-      </li>
-    </ul>
+    <div className="nav-container">
+      <div className="logo-container" onClick={goHome}>
+        <img className="logo" src={logo} alt="dis is a logo" />
+      </div>
+      <div className="right-side-navbar-div">
+        <DemoLogin />
+        <LoginFormModal />
+        <ProfileButton user={sessionUser} />
+      </div>
+    </div>
   );
 }
 
