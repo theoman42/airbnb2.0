@@ -5,22 +5,23 @@ import * as sessionActions from "../../store/session";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFaceSmile, faBars } from "@fortawesome/free-solid-svg-icons";
 import LoginFormModal from "../LoginFormModal";
+import SignupFormModal from "../SignupFormModal";
 
 function ProfileButton({ user }) {
   const sessionUser = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
-  const [showMenu, setShowMenu] = useState(false);
+  const [showMenu, setShowMenu] = useState("isHidden");
 
   const openMenu = () => {
-    if (showMenu) return;
-    setShowMenu(true);
+    if (showMenu === "isShown") return;
+    setShowMenu("isShown");
   };
 
   useEffect(() => {
-    if (!showMenu) return;
+    if (showMenu === "isHidden") return;
 
     const closeMenu = () => {
-      setShowMenu(false);
+      setShowMenu("isHidden");
     };
 
     document.addEventListener("click", closeMenu);
@@ -42,10 +43,10 @@ function ProfileButton({ user }) {
     );
   } else {
     sessionLinks = (
-      <div className="profile-dropdown">
+      <>
         <LoginFormModal />
-        <NavLink to="/signup">Sign Up</NavLink>
-      </div>
+        <SignupFormModal />
+      </>
     );
   }
 
@@ -55,7 +56,9 @@ function ProfileButton({ user }) {
         <FontAwesomeIcon className="bars-icon" icon={faBars} />
         <FontAwesomeIcon className="user-icon" icon={faFaceSmile} />
       </button>
-      <div className="dropdown-wrapper">{showMenu && sessionLinks}</div>
+      <div className="dropdown-wrapper">
+        <div className={`profile-dropdown ${showMenu}`}>{sessionLinks}</div>
+      </div>
     </>
   );
 }

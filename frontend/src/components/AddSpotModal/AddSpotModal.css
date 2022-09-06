@@ -1,0 +1,14 @@
+.add-spot-button {
+  margin-right: 10px;
+  background-color: white;
+  border: none;
+  border-radius: 21px;
+  transition: all .2s ease;
+  padding: 0px 20px;
+  border: 1px solid white;
+}
+
+.add-spot-button:hover {
+  color: #E25959;
+  border: 1px solid #E25959;
+}

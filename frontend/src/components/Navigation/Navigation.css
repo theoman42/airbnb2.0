@@ -6,13 +6,19 @@
 .demo-button {
   background-color: white;
   border: none;
-  width: 100px;
   border-radius: 21px;
   transition: all .2s ease;
+  padding: 0px 20px;
+  border: 1px solid white
 }
+
 .demo-button:hover {
   color: #E25959;
   border: 1px solid #E25959;
+}
+
+div.isHidden  {
+  visibility: hidden;
 }
 
 .profile-button {
@@ -29,6 +35,8 @@
 .profile-button:hover {
   box-shadow: 0 5px 6px rgba(0, 0, 0, 0.1);;
 }
+
+
 .dropdown-wrapper {
   direction: rtl;
 }
@@ -63,7 +71,9 @@
 .nav-container {
   display: flex;
   justify-content: space-between;
-  padding: 5px 20px;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgb(220, 220, 220);
 }
 
 .logo-container {

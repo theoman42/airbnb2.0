@@ -4,8 +4,8 @@ import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
 import logo from "../../images/logo.png";
-import LoginFormModal from "../LoginFormModal";
 import DemoLogin from "./DemoLogin";
+import AddSpotModal from "../AddSpotModal";
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
@@ -22,7 +22,7 @@ function Navigation({ isLoaded }) {
       </div>
       <div className="right-side-navbar-div">
         <DemoLogin />
-        <LoginFormModal />
+        <AddSpotModal />
         <ProfileButton user={sessionUser} />
       </div>
     </div>

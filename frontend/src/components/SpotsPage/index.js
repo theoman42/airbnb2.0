@@ -4,22 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect, NavLink } from "react-router-dom";
 import "./Spots.css";
 import { getSpots } from "../../store/spots";
-import FormButtons from "./FormButton";
-import SpotsForm from "./SpotsForm";
 
 const SpotsPage = () => {
   const dispatch = useDispatch();
-  const currentUser = useSelector((state) => state.session.user);
   const spots = Object.values(useSelector((state) => state.spots));
   useEffect(() => {
     dispatch(getSpots());
   }, [dispatch]);
 
-  //'null', 'addForm', 'editForm'
-  const [showForm, setShowForm] = useState(false);
-
-  //Retrieve an array of all spots;
-  //map through all spots
   return (
     <main>
       <div className="spots-page-wrapper">
