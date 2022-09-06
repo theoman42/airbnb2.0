@@ -17,9 +17,12 @@ router.use("/reviews", reviewsRouter);
 router.use("/bookings", bookingsRouter);
 router.use("/images", imagesRouter);
 
+router.post("/test", function (req, res) {
+  res.json({ requestBody: req.body });
+});
+
 //Restore User Session
-router.get("/", restoreUser, (req, res) => {
-  //res.send("Welcome to Airbnb");
+router.get("/restore", restoreUser, (req, res) => {
   const { user } = req;
   if (user) {
     return res.json({

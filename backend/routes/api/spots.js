@@ -19,6 +19,13 @@ const user = require("../../db/models/user");
 
 const router = express.Router();
 
+// if (process.env.NODE_ENV !== "production") {
+//   router.get("/api/csrf/restore", (req, res) => {
+//     res.cookie("XSRF-TOKEN", req.csrfToken());
+//     res.status(200).json({});
+//   });
+// }
+
 //Add an Image to a SPOT based on the SPOT's ID
 router.post("/:spotId/images", requireAuth, async (req, res) => {
   const { user } = req;
@@ -297,7 +304,6 @@ router.put(
     res.json(updatedReview);
   }
 );
-
 
 //CREATE A NEW SPOT
 router.post("/", requireAuth, validateSpotBody, async (req, res) => {
