@@ -18,8 +18,12 @@ const SpotsDisplay = () => {
     <>
       <div className="spots-display-container"></div>
       <div className="spots-title-container">
-        <div className="spot-title">{"spot.name"}</div>
-        <div></div>
+        <div className="spot-title">{spot.name}</div>
+        <div className="gallery-wrapper">
+          {/* {spot.images.map((spot) => {
+            return <img src="" alt="images" />;
+          })} */}
+        </div>
       </div>
     </>
   );

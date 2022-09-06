@@ -56,7 +56,6 @@ export const addSpot = (payload) => async (dispatch) => {
 
   if (res.ok) {
     const spot = await res.json();
-    console.log(spot);
     dispatch(addNewSpot(spot));
     return spot;
   }
