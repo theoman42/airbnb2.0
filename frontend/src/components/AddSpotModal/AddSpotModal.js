@@ -42,9 +42,8 @@ const SpotsForm = (props) => {
     };
 
     let newSpot = await dispatch(addSpot(payload));
-    console.log(newSpot);
     if (newSpot) {
-      history.push(`/spot/${newSpot.id}`);
+      history.push(`/spots/${newSpot.id}`);
     }
   };
 

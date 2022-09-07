@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
@@ -21,7 +21,7 @@ function Navigation({ isLoaded }) {
         <img className="logo" src={logo} alt="dis is a logo" />
       </div>
       <div className="right-side-navbar-div">
-        <DemoLogin />
+        {!sessionUser && <DemoLogin />}
         <AddSpotModal />
         <ProfileButton user={sessionUser} />
       </div>

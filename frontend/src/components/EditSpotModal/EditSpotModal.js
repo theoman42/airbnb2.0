@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { addSpot } from "../../store/spots";
+import { editOwnerSpot } from "../../store/spots";
 
 const SpotsForm = (props) => {
   const dispatch = useDispatch();
@@ -41,16 +41,14 @@ const SpotsForm = (props) => {
       price,
     };
 
-    let newSpot = await dispatch(addSpot(payload));
+    let newSpot = await dispatch(editOwnerSpot(payload, props.id));
     if (newSpot) {
-      history.push(`/spot/${newSpot.id}`);
-      props.hideForm();
+      history.push(`/spots/${newSpot.id}`);
     }
   };
 
   const handleCancel = (e) => {
     e.preventDefault();
-    props.hideForm();
   };
 
   return (

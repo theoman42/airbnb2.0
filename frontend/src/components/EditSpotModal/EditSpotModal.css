@@ -1,17 +1,4 @@
-.spots-display-container {
-
-}
-
-.spots-title-container {
-  display: grid;
-}
-
-.spot-title {
-
-}
-
-
-.delete-spot-button {
+.edit-spot-button {
   margin-right: 10px;
   background-color: white;
   border: none;
@@ -21,7 +8,7 @@
   border: 1px solid white;
 }
 
-.delete-spot-button:hover {
+.edit-spot-button:hover {
   color: #E25959;
   border: 1px solid #E25959;
 }

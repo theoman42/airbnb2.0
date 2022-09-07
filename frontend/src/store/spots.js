@@ -27,6 +27,20 @@ export const addNewSpot = (spot) => {
   };
 };
 
+export const editSpot = (spot) => {
+  return {
+    type: EDIT_SPOT,
+    payload: spot,
+  };
+};
+
+export const deleteSpot = (id) => {
+  return {
+    type: DELETE_SPOT,
+    payload: id,
+  };
+};
+
 export const getSpots = () => async (dispatch) => {
   const res = await csrfFetch("/spots");
 
@@ -42,6 +56,7 @@ export const getOneSpot = (id) => async (dispatch) => {
   if (res.ok) {
     const spot = await res.json();
     dispatch(getSpot(spot));
+    return spot;
   }
 };
 
@@ -61,6 +76,33 @@ export const addSpot = (payload) => async (dispatch) => {
   }
 };
 
+export const editOwnerSpot = (payload, id) => async (dispatch) => {
+  const res = await csrfFetch(`/spots/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
+
+  if (res.ok) {
+    const spot = await res.json();
+    dispatch(editSpot(spot));
+    return spot;
+  }
+};
+
+export const deleteOwnerSpot = (id) => async (dispatch) => {
+  console.log(id);
+  const res = await csrfFetch(`/spots/${id}`, {
+    method: "DELETE",
+  });
+
+  if (res.ok) {
+    dispatch(deleteSpot);
+  }
+};
+
 const spotReducer = (state = {}, action) => {
   switch (action.type) {
     case LOAD:
@@ -68,16 +110,22 @@ const spotReducer = (state = {}, action) => {
       action.payload.spots.forEach((spot) => {
         spots[spot.id] = spot;
       });
-      return { ...state, ...spots };
+      return { ...spots };
     case GET_SPOT:
       state.currentSpot = action.payload;
-      return state.currentSpot;
+      return state;
     case ADD_SPOT:
+      const addSpot = { ...state };
+
       return state;
     case EDIT_SPOT:
-      return state;
+      const newEditState = { ...state };
+      newEditState[action.payload.id] = action.payload;
+      return newEditState;
     case DELETE_SPOT:
-      return state;
+      const newDeleteState = { ...state };
+      delete newDeleteState[action.payload.id];
+      return newDeleteState;
     default:
       return state;
   }
