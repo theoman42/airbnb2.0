@@ -19,13 +19,6 @@ const user = require("../../db/models/user");
 
 const router = express.Router();
 
-// if (process.env.NODE_ENV !== "production") {
-//   router.get("/api/csrf/restore", (req, res) => {
-//     res.cookie("XSRF-TOKEN", req.csrfToken());
-//     res.status(200).json({});
-//   });
-// }
-
 //Add an Image to a SPOT based on the SPOT's ID
 router.post("/:spotId/images", requireAuth, async (req, res) => {
   const { user } = req;
@@ -183,7 +176,7 @@ router.get("/:spotId/reviews", async (req, res) => {
     throw err;
   }
 
-  const Reviews = await Review.findAll({
+  const reviews = await Review.findAll({
     where: {
       spotId,
     },
@@ -203,12 +196,12 @@ router.get("/:spotId/reviews", async (req, res) => {
       },
     ],
   });
-  if (!Reviews.length) {
+  if (!reviews.length) {
     const err = new ERROR("Spot couldn't be found");
     err.status = 404;
     throw err;
   }
-  res.json({ Reviews });
+  res.json({ reviews });
 });
 
 //CREATE A REVIEW For SPOT Based on ID
