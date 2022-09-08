@@ -4,10 +4,18 @@
 
 .spots-title-container {
   display: grid;
+  border: 1px solid black;
+  height: 50px;
 }
+
 
 .spot-title {
 
+}
+
+.gallery-wrapper {
+  height: 300px;
+  border: 1px solid black;
 }
 
 
@@ -24,4 +32,14 @@
 .delete-spot-button:hover {
   color: #E25959;
   border: 1px solid #E25959;
+}
+
+
+.review-container {
+
+}
+.single-review-container {
+  border: 1px solid #E25959;
+  border-radius: 12px;
+  padding: 15px;
 }

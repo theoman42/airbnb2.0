@@ -93,13 +93,12 @@ export const editOwnerSpot = (payload, id) => async (dispatch) => {
 };
 
 export const deleteOwnerSpot = (id) => async (dispatch) => {
-  console.log(id);
   const res = await csrfFetch(`/spots/${id}`, {
     method: "DELETE",
   });
 
   if (res.ok) {
-    dispatch(deleteSpot);
+    dispatch(deleteSpot(id));
   }
 };
 
@@ -116,15 +115,15 @@ const spotReducer = (state = {}, action) => {
       return state;
     case ADD_SPOT:
       const addSpot = { ...state };
-
-      return state;
+      addSpot[action.payload.id] = action.payload;
+      return addSpot;
     case EDIT_SPOT:
       const newEditState = { ...state };
       newEditState[action.payload.id] = action.payload;
       return newEditState;
     case DELETE_SPOT:
       const newDeleteState = { ...state };
-      delete newDeleteState[action.payload.id];
+      delete newDeleteState[action.payload];
       return newDeleteState;
     default:
       return state;

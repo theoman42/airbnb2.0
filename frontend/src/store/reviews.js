@@ -20,13 +20,6 @@ export const getReview = (review) => {
   };
 };
 
-export const addNewSpot = (review) => {
-  return {
-    type: ADD_REVIEW,
-    payload: review,
-  };
-};
-
 export const getReviewsfromSpotId = (spotId) => async (dispatch) => {
   const res = await csrfFetch(`/spots/${spotId}/reviews`);
 
@@ -43,7 +36,7 @@ const reviewReducer = (state = {}, action) => {
       action.payload.reviews.forEach((review) => {
         reviews[review.id] = review;
       });
-      return { ...state, ...reviews };
+      return { ...reviews };
     case GET_REVIEW:
       return state;
     case ADD_REVIEW:

@@ -3,6 +3,7 @@ import { useParams, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { deleteOwnerSpot, getOneSpot, getSpots } from "../../store/spots";
+import { getReviewsfromSpotId } from "../../store/reviews";
 import EditSpotModal from "../EditSpotModal";
 
 const SpotsDisplay = () => {
@@ -12,17 +13,28 @@ const SpotsDisplay = () => {
   id = parseInt(id);
   const [isLoaded, setIsLoaded] = useState(false);
   const [isOwned, setIsOwned] = useState(false);
+  const [isReviewOwned, setisReviewOwned] = useState(false);
   const spot = useSelector((state) => state.spots.currentSpot);
   const user = useSelector((state) => state.session.user);
+  const reviews = Object.values(useSelector((state) => state.reviews));
 
-  const handleDelete = () => {
+  const handleDeleteSpot = () => {
     dispatch(deleteOwnerSpot(id));
     dispatch(getSpots());
     history.push("/");
   };
 
+  const handleEditReview = () => {
+    dispatch();
+  };
+
+  const handleDeleteReview = () => {
+    dispatch();
+  };
+
   useEffect(() => {
     dispatch(getOneSpot(id)).then(() => setIsLoaded(true));
+    dispatch(getReviewsfromSpotId(id));
   }, [id, dispatch]);
 
   useEffect(() => {
@@ -34,6 +46,7 @@ const SpotsDisplay = () => {
       }
     }
   }, [id, spot, user]);
+
   return (
     <>
       {isLoaded && (
@@ -42,7 +55,10 @@ const SpotsDisplay = () => {
             {isOwned && (
               <>
                 <EditSpotModal id={id} />
-                <button className="delete-spot-button" onClick={handleDelete}>
+                <button
+                  className="delete-spot-button"
+                  onClick={handleDeleteSpot}
+                >
                   {" "}
                   Delete{" "}
                 </button>
@@ -50,11 +66,29 @@ const SpotsDisplay = () => {
             )}
             <div className="spots-title-container">
               <div className="spot-title">{spot.name}</div>
-              <div className="gallery-wrapper">
-                {/* {spot.images.map((spot) => {
+            </div>
+            <div className="gallery-wrapper">
+              hi
+              {/* {spot.images.map((spot) => {
                     return <img src="" alt="images" />;
                   })} */}
-              </div>
+            </div>
+            <div className="review-container">
+              <h3>Reviews</h3>
+              {reviews.map((review) => {
+                return (
+                  <div key={review.id} className="single-review-container">
+                    <span>{`${review.User.firstName} ${review.User.lastName}`}</span>
+                    <p>{`${review.review}`}</p>
+                    {review.User.id === user?.id && (
+                      <>
+                        <button onClick={handleEditReview}> Edit </button>
+                        <button onClick={handleDeleteReview}> Delete </button>
+                      </>
+                    )}
+                  </div>
+                );
+              })}
             </div>
           </div>
         </>
