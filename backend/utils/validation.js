@@ -3,12 +3,14 @@ const { check } = require("express-validator");
 
 const handleValidationErrors = (req, _res, next) => {
   const validationErrors = validationResult(req);
-  let errorObj = {};
+  let errorArray = [];
   if (!validationErrors.isEmpty()) {
-    const errors = validationErrors.array().map((error) => error.msg);
+    const errors = validationErrors.array().map((error) => {
+      errorArray.push(error.msg);
+    });
 
     const err = Error("Validation Error");
-    err.errors = errors;
+    err.errors = errorArray;
     err.status = 400;
     err.title = "Validation Error";
 
