@@ -11,7 +11,10 @@ const EditSpotModal = (props) => {
   return (
     <>
       {sessionUser && (
-        <button className="edit-spot-button" onClick={() => setShowModal(true)}>
+        <button
+          className="spot-display-buttons"
+          onClick={() => setShowModal(true)}
+        >
           Edit Spot
         </button>
       )}

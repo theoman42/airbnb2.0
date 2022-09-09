@@ -1,6 +1,7 @@
-.edit-spot-button {
+.spot-display-buttons {
   margin-right: 10px;
-  background-color: white;
+  background-color: #5959e2;
+  color: white;
   border: none;
   border-radius: 21px;
   transition: all .2s ease;
@@ -8,7 +9,8 @@
   border: 1px solid white;
 }
 
-.edit-spot-button:hover {
+.spot-display-buttons:hover {
   color: #E25959;
+  background-color: white;
   border: 1px solid #E25959;
 }

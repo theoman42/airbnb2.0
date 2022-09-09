@@ -9,7 +9,7 @@ import EditReviewModal from "../EditReviewModal";
 import AddReviewModal from "../AddReviewModal";
 import ReviewTitleComponent from "./Reviews";
 
-const SpotsDisplay = () => {
+const SpotsDisplay = (props) => {
   const dispatch = useDispatch();
   const history = useHistory();
   let { id } = useParams();
@@ -58,11 +58,13 @@ const SpotsDisplay = () => {
     if (spot && user) {
       if (spot.ownerId === user.id) {
         setIsOwned(true);
-      } else {
-        setIsOwned(false);
       }
+    } else {
+      setIsOwned(false);
     }
-  }, [id, spot, user]);
+  }, [user, spot]);
+
+  console.log(isOwned);
 
   return (
     <main className="page-container">
@@ -70,16 +72,16 @@ const SpotsDisplay = () => {
         <>
           <div className="spots-display-container">
             {isOwned && (
-              <>
+              <div className="button-holder">
                 <EditSpotModal id={id} />
                 <button
-                  className="delete-spot-button"
+                  className="spot-display-buttons"
                   onClick={handleDeleteSpot}
                 >
                   {" "}
                   Delete{" "}
                 </button>
-              </>
+              </div>
             )}
             <div className="spots-title-container">
               <h1 className="spot-title">{spot.name}</h1>
@@ -93,6 +95,9 @@ const SpotsDisplay = () => {
               {/* {spot.images.map((spot) => {
                     return <img src="" alt="images" />;
                   })} */}
+            </div>
+            <div className="description-wrapper">
+              <p>{spot.description}</p>
             </div>
             <div className="review-container">
               <h3>Reviews</h3>

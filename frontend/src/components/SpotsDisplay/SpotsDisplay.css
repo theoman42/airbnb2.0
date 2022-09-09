@@ -2,15 +2,17 @@
 
 }
 
+.button-holder {
+  padding: 20px;
+}
 .spots-title-container {
   display: flex;
   flex-direction: column;
   padding: 20px 0px;
 }
 
-
 .spot-title {
-
+  margin: 5px;
 }
 
 .meta-data-holder {
@@ -25,21 +27,12 @@
   background-color: #E25959;
 }
 
-
-.delete-spot-button {
-  margin-right: 10px;
-  background-color: white;
-  border: none;
-  border-radius: 21px;
-  transition: all .2s ease;
-  padding: 5px 20px;
-  border: 1px solid white;
+.description-wrapper {
+  padding: 20px;
 }
 
-.delete-spot-button:hover {
-  color: #E25959;
-  border: 1px solid #E25959;
-}
+
+
 
 .review-container {
 
