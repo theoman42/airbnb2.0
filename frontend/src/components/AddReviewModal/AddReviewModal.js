@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { addReview } from "../../store/reviews";
+import "./AddReviewModal.css";
 
 const ReviewForm = (props) => {
   const dispatch = useDispatch();
@@ -32,8 +33,8 @@ const ReviewForm = (props) => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit} className="review-text-wrapper">
+    <div className="modal-form-wrapper">
+      <form onSubmit={handleSubmit} className="modal-form-container">
         <ul>
           {errors.map((error, idx) => (
             <li key={idx}>{error}</li>

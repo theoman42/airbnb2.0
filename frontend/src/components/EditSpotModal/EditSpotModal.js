@@ -55,8 +55,8 @@ const SpotsForm = (props) => {
   };
 
   return (
-    <div>
-      <form className="form-wrapper" onSubmit={handleSubmit}>
+    <div className="modal-form-wrapper">
+      <form className="modal-form-container" onSubmit={handleSubmit}>
         <ul>
           {errors.map((error, idx) => (
             <li key={idx}>{error}</li>

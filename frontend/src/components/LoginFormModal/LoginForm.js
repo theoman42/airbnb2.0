@@ -21,8 +21,8 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="form-wrapper">
-      <form onSubmit={handleSubmit}>
+    <div className="modal-form-wrapper">
+      <form className="modal-form-container" onSubmit={handleSubmit}>
         <ul>
           {errors.map((error, idx) => (
             <li key={idx}>{error}</li>

@@ -2,3 +2,15 @@
   padding-left: 30px;
   padding-right: 30px;
 }
+
+.modal-form-wrapper {
+  padding: 20px;
+  height: 200px;
+}
+
+.modal-form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}

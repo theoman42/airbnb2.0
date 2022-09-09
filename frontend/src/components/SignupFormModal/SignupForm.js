@@ -32,8 +32,8 @@ function SignupFormPage(props) {
   };
 
   return (
-    <div className="form-wrapper">
-      <form onSubmit={handleSubmit}>
+    <div className="modal-form-wrapper">
+      <form onSubmit={handleSubmit} className="modal-form-container">
         <ul>
           {errors.map((error, idx) => (
             <li key={idx}>{error}</li>

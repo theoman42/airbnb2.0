@@ -32,8 +32,8 @@ const ReviewForm = (props) => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit} className="review-text-wrapper">
+    <div className="modal-form-wrapper">
+      <form onSubmit={handleSubmit} className="modal-form-container">
         <ul>
           {errors.map((error, idx) => (
             <li key={idx}>{error}</li>
