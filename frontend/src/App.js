@@ -14,7 +14,6 @@ function App() {
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
-
   return (
     <>
       <Navigation isLoaded={isLoaded} />
@@ -22,9 +21,6 @@ function App() {
         <Switch>
           <Route exact path="/">
             <SpotsPage />
-          </Route>
-          <Route path="/signup">
-            <SignupFormPage />
           </Route>
           <Route path="/spots/:id">
             <SpotsDisplay />

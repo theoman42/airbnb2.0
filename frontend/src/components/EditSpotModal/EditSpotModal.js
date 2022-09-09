@@ -56,73 +56,79 @@ const SpotsForm = (props) => {
 
   return (
     <div>
-      <form className="form-wrapper" onSubmit={handleSubmit}></form>
-      <input
-        type="text"
-        placeholder="Address"
-        required
-        value={address}
-        onChange={updateAddress}
-      />
-      <input
-        type="text"
-        placeholder="City"
-        required
-        value={city}
-        onChange={updateCity}
-      />
-      <input
-        type="text"
-        placeholder="State"
-        required
-        value={state}
-        onChange={updateState}
-      />
-      <input
-        type="text"
-        placeholder="Country"
-        required
-        value={country}
-        onChange={updateCountry}
-      />
-      <input
-        type="number"
-        placeholder="Latitude"
-        required
-        value={lat}
-        onChange={updateLat}
-      />
-      <input
-        type="number"
-        placeholder="Longitude"
-        required
-        value={lng}
-        onChange={updateLng}
-      />
-      <input
-        type="text"
-        placeholder="Name"
-        required
-        value={name}
-        onChange={updateName}
-      />
-      <input
-        type="text"
-        placeholder="Description"
-        required
-        value={description}
-        onChange={updateDescription}
-      />
-      <input
-        type="number"
-        placeholder="Price"
-        required
-        value={price}
-        onChange={updatePrice}
-      />
-      <button type="submit" onClick={handleSubmit}>
-        Submit Form
-      </button>
+      <form className="form-wrapper" onSubmit={handleSubmit}>
+        <ul>
+          {errors.map((error, idx) => (
+            <li key={idx}>{error}</li>
+          ))}
+        </ul>
+        <input
+          type="text"
+          placeholder="Address"
+          required
+          value={address}
+          onChange={updateAddress}
+        />
+        <input
+          type="text"
+          placeholder="City"
+          required
+          value={city}
+          onChange={updateCity}
+        />
+        <input
+          type="text"
+          placeholder="State"
+          required
+          value={state}
+          onChange={updateState}
+        />
+        <input
+          type="text"
+          placeholder="Country"
+          required
+          value={country}
+          onChange={updateCountry}
+        />
+        <input
+          type="number"
+          placeholder="Latitude"
+          required
+          value={lat}
+          onChange={updateLat}
+        />
+        <input
+          type="number"
+          placeholder="Longitude"
+          required
+          value={lng}
+          onChange={updateLng}
+        />
+        <input
+          type="text"
+          placeholder="Name"
+          required
+          value={name}
+          onChange={updateName}
+        />
+        <input
+          type="text"
+          placeholder="Description"
+          required
+          value={description}
+          onChange={updateDescription}
+        />
+        <input
+          type="number"
+          placeholder="Price"
+          required
+          value={price}
+          onChange={updatePrice}
+        />
+        <button type="submit" onClick={handleSubmit}>
+          Submit Form
+        </button>
+      </form>
     </div>
   );
 };

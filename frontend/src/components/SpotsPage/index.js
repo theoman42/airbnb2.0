@@ -13,7 +13,7 @@ const SpotsPage = () => {
   }, [dispatch]);
 
   return (
-    <main>
+    <main className="page-container">
       <div className="spots-page-wrapper">
         <div className="grid-container">
           {spots.map((spot) => {

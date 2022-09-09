@@ -3,9 +3,9 @@
 }
 
 .spots-title-container {
-  display: grid;
-  border: 1px solid black;
-  height: 50px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0px;
 }
 
 
@@ -13,9 +13,16 @@
 
 }
 
+.meta-data-holder {
+  display: flex;
+  gap: 20px;
+}
+
 .gallery-wrapper {
   height: 300px;
-  border: 1px solid black;
+  padding: 20px;
+  border-radius: 12px;
+  background-color: #E25959;
 }
 
 

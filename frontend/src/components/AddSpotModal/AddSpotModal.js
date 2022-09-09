@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
 import { addSpot } from "../../store/spots";
 
 const SpotsForm = (props) => {
@@ -48,7 +48,7 @@ const SpotsForm = (props) => {
     });
 
     if (newSpot) {
-      history.push(`/spot/${newSpot.id}`);
+      history.push(`/spots/${newSpot.id}`);
       props.onClose();
     }
   };

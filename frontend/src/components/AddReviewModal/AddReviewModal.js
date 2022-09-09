@@ -26,7 +26,6 @@ const ReviewForm = (props) => {
         if (data && data.errors) setErrors(data.errors);
       }
     );
-    console.log(newReview);
     if (newReview) {
       props.onClose();
     }

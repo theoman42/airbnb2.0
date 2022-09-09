@@ -18,9 +18,10 @@ export const deleteReview = (review) => {
 };
 
 export const getReviewsfromSpotId = (spotId) => async (dispatch) => {
-  const res = await csrfFetch(`/spots/${spotId}/reviews`);
-
-  if (res.ok) {
+  const res = await csrfFetch(`/spots/${spotId}/reviews`).catch(async (res) => {
+    dispatch(load({ reviews: [] }));
+  });
+  if (res) {
     const allReviews = await res.json();
     dispatch(load(allReviews));
     return allReviews;
@@ -74,7 +75,7 @@ const reviewReducer = (state = {}, action) => {
       action.payload.reviews.forEach((review) => {
         reviews[review.id] = review;
       });
-      return { ...reviews };
+      return reviews;
     case DELETE_REVIEW:
       const deleteReviews = { ...state };
       delete deleteReviews[action.payload];

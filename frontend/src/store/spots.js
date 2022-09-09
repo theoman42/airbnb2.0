@@ -87,7 +87,7 @@ export const editOwnerSpot = (payload, id) => async (dispatch) => {
 
   if (res.ok) {
     const spot = await res.json();
-    dispatch(editSpot(spot));
+    dispatch(getOneSpot(spot.id));
     return spot;
   }
 };
@@ -111,8 +111,9 @@ const spotReducer = (state = {}, action) => {
       });
       return { ...spots };
     case GET_SPOT:
-      state.currentSpot = action.payload;
-      return state;
+      const newState = {};
+      newState.currentSpot = action.payload;
+      return newState;
     case ADD_SPOT:
       const addSpot = {};
       addSpot.currentSpot = action.payload;

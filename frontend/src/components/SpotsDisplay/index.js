@@ -7,15 +7,17 @@ import { getReviewsfromSpotId, deleteOneReview } from "../../store/reviews";
 import EditSpotModal from "../EditSpotModal";
 import EditReviewModal from "../EditReviewModal";
 import AddReviewModal from "../AddReviewModal";
+import ReviewTitleComponent from "./Reviews";
 
 const SpotsDisplay = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   let { id } = useParams();
   id = parseInt(id);
+
   const [isLoaded, setIsLoaded] = useState(false);
   const [isOwned, setIsOwned] = useState(false);
-  const [noReviews, setNoReviews] = useState(true);
+  const [errors, setErrors] = useState([]);
 
   const spot = useSelector((state) => state.spots.currentSpot);
   const user = useSelector((state) => state.session.user);
@@ -32,12 +34,23 @@ const SpotsDisplay = () => {
   };
 
   useEffect(() => {
+    if (spot) {
+      dispatch(getReviewsfromSpotId(spot.id)).catch(async (res) => {
+        const data = await res.json();
+        if (data && data.errors) setErrors(data.errors);
+      });
+    }
+  }, [spot]);
+
+  useEffect(() => {
+    console.log("one");
+  }, [dispatch]);
+
+  useEffect(() => {
     dispatch(getOneSpot(id)).then(() => setIsLoaded(true));
-    setNoReviews(true);
     dispatch(getReviewsfromSpotId(id)).catch(async (res) => {
-      if (res.status === 500) {
-        setNoReviews(false);
-      }
+      const data = await res.json();
+      if (data && data.errors) setErrors(data.errors);
     });
   }, [dispatch]);
 
@@ -52,7 +65,7 @@ const SpotsDisplay = () => {
   }, [id, spot, user]);
 
   return (
-    <>
+    <main className="page-container">
       {isLoaded && (
         <>
           <div className="spots-display-container">
@@ -69,7 +82,11 @@ const SpotsDisplay = () => {
               </>
             )}
             <div className="spots-title-container">
-              <div className="spot-title">{spot.name}</div>
+              <h1 className="spot-title">{spot.name}</h1>
+              <div className="meta-data-holder">
+                <ReviewTitleComponent />
+                <div className="">{`${spot.city}, ${spot.state}, ${spot.country}`}</div>
+              </div>
             </div>
             <div className="gallery-wrapper">
               hi
@@ -80,30 +97,29 @@ const SpotsDisplay = () => {
             <div className="review-container">
               <h3>Reviews</h3>
               <AddReviewModal spotId={id} />
-              {noReviews &&
-                reviews.map((review) => {
-                  return (
-                    <div key={review.id} className="single-review-container">
-                      <span>{`${review.User.firstName} ${review.User.lastName}`}</span>
-                      <div className="review-text-wrapper">
-                        <p>{`${review.review}`}</p>
-                      </div>
-                      {review.User.id === user?.id && (
-                        <>
-                          <EditReviewModal spotId={id} reviewId={review.id} />
-                          <button onClick={() => handleDeleteReview(review.id)}>
-                            Delete
-                          </button>
-                        </>
-                      )}
+              {reviews.map((review) => {
+                return (
+                  <div key={review.id} className="single-review-container">
+                    <span>{`${review.User.firstName} ${review.User.lastName}`}</span>
+                    <div className="review-text-wrapper">
+                      <p>{`${review.review}`}</p>
                     </div>
-                  );
-                })}
+                    {review.User.id === user?.id && (
+                      <>
+                        <EditReviewModal spotId={id} reviewId={review.id} />
+                        <button onClick={() => handleDeleteReview(review.id)}>
+                          Delete
+                        </button>
+                      </>
+                    )}
+                  </div>
+                );
+              })}
             </div>
           </div>
         </>
       )}
-    </>
+    </main>
   );
 };
 
