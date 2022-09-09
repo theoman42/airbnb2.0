@@ -1,27 +1,27 @@
 import React, { useState } from "react";
 import { Modal } from "../../context/Modal";
-import SpotsForm from "./AddSpotModal";
-import "./AddSpotModal.css";
+import ReviewForm from "./AddReviewModal";
+import "./AddReviewModal.css";
 import { useSelector } from "react-redux";
 
-const AddSpotModal = () => {
+const AddReviewModal = (props) => {
   const sessionUser = useSelector((state) => state.session.user);
   const [showModal, setShowModal] = useState(false);
 
   return (
     <>
       {sessionUser && (
-        <button className="add-spot-button" onClick={() => setShowModal(true)}>
-          Add Spot
+        <button className="add-edit-button" onClick={() => setShowModal(true)}>
+          Add Review
         </button>
       )}
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          <SpotsForm onClose={() => setShowModal(false)} />
+          <ReviewForm spotId={props.spotId} />
         </Modal>
       )}
     </>
   );
 };
 
-export default AddSpotModal;
+export default AddReviewModal;

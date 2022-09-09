@@ -26,7 +26,7 @@ const SpotsForm = (props) => {
   const updateDescription = (e) => setDescription(e.target.value);
   const updatePrice = (e) => setPrice(e.target.value);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     const payload = {
@@ -41,90 +41,90 @@ const SpotsForm = (props) => {
       price,
     };
 
-    let newSpot = await dispatch(addSpot(payload));
-    if (newSpot) {
-      history.push(`/spot/${newSpot.id}`);
-      props.hideForm();
-    }
-  };
-
-  const handleCancel = (e) => {
-    e.preventDefault();
-    props.hideForm();
+    return dispatch(addSpot(payload)).catch(async (res) => {
+      const data = await res.json();
+      if (data && data.errors) setErrors(data.errors);
+      if (newSpot) {
+        history.push(`/spot/${newSpot.id}`);
+      }
+    });
   };
 
   return (
     <div>
-      <form className="form-wrapper" onSubmit={handleSubmit}></form>
-      <input
-        type="text"
-        placeholder="Address"
-        required
-        value={address}
-        onChange={updateAddress}
-      />
-      <input
-        type="text"
-        placeholder="City"
-        required
-        value={city}
-        onChange={updateCity}
-      />
-      <input
-        type="text"
-        placeholder="State"
-        required
-        value={state}
-        onChange={updateState}
-      />
-      <input
-        type="text"
-        placeholder="Country"
-        required
-        value={country}
-        onChange={updateCountry}
-      />
-      <input
-        type="number"
-        placeholder="Latitude"
-        required
-        value={lat}
-        onChange={updateLat}
-      />
-      <input
-        type="number"
-        placeholder="Longitude"
-        required
-        value={lng}
-        onChange={updateLng}
-      />
-      <input
-        type="text"
-        placeholder="Name"
-        required
-        value={name}
-        onChange={updateName}
-      />
-      <input
-        type="text"
-        placeholder="Description"
-        required
-        value={description}
-        onChange={updateDescription}
-      />
-      <input
-        type="number"
-        placeholder="Price"
-        required
-        value={price}
-        onChange={updatePrice}
-      />
-      <button type="submit" onClick={handleSubmit}>
-        Submit Form
-      </button>
-      <button type="button" onClick={handleCancel}>
-        Cancel
-      </button>
+      <form className="form-wrapper" onSubmit={handleSubmit}>
+        <ul>
+          {errors.map((error, idx) => (
+            <li key={idx}>{error}</li>
+          ))}
+        </ul>
+        <input
+          type="text"
+          placeholder="Address"
+          value={address}
+          onChange={updateAddress}
+          required
+        />
+        <input
+          type="text"
+          placeholder="City"
+          value={city}
+          onChange={updateCity}
+          required
+        />
+        <input
+          type="text"
+          placeholder="State"
+          value={state}
+          onChange={updateState}
+          required
+        />
+        <input
+          type="text"
+          placeholder="Country"
+          value={country}
+          onChange={updateCountry}
+          required
+        />
+        <input
+          type="number"
+          placeholder="Latitude"
+          value={lat}
+          onChange={updateLat}
+          required
+        />
+        <input
+          type="number"
+          placeholder="Longitude"
+          value={lng}
+          onChange={updateLng}
+          required
+        />
+        <input
+          type="text"
+          placeholder="Name"
+          value={name}
+          onChange={updateName}
+          required
+        />
+        <input
+          type="text"
+          placeholder="Description"
+          value={description}
+          onChange={updateDescription}
+          required
+        />
+        <input
+          type="number"
+          placeholder="Price"
+          value={price}
+          onChange={updatePrice}
+          required
+        />
+        <button type="submit" onClick={handleSubmit}>
+          Submit Form
+        </button>
+      </form>
     </div>
   );
 };

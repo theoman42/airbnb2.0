@@ -1,9 +1,6 @@
 import { csrfFetch } from "./csrf";
 
 const LOAD = "reviews/load";
-const GET_REVIEW = "reviews/getSpot";
-const ADD_REVIEW = "reviews/add";
-const EDIT_REVIEW = "reviews/edit";
 const DELETE_REVIEW = "reviews/delete";
 
 export const load = (reviews) => {
@@ -13,9 +10,9 @@ export const load = (reviews) => {
   };
 };
 
-export const getReview = (review) => {
+export const deleteReview = (review) => {
   return {
-    type: GET_REVIEW,
+    type: DELETE_REVIEW,
     payload: review,
   };
 };
@@ -26,6 +23,47 @@ export const getReviewsfromSpotId = (spotId) => async (dispatch) => {
   if (res.ok) {
     const allReviews = await res.json();
     dispatch(load(allReviews));
+    return;
+  }
+};
+
+export const addReview = (review, spotId) => async (dispatch) => {
+  const res = await csrfFetch(`/spots/${spotId}/reviews`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(review),
+  });
+
+  if (res.ok) {
+    dispatch(getReviewsfromSpotId(spotId));
+    return;
+  }
+};
+
+export const updateReview = (review, spotId, reviewId) => async (dispatch) => {
+  const res = await csrfFetch(`/spots/${spotId}/reviews/${reviewId}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(review),
+  });
+
+  if (res.ok) {
+    dispatch(getReviewsfromSpotId(spotId));
+    return;
+  }
+};
+
+export const deleteOneReview = (reviewId) => async (dispatch) => {
+  const res = await csrfFetch(`/reviews/${reviewId}`, {
+    method: "DELETE",
+  });
+  if (res.ok) {
+    dispatch(deleteReview(reviewId));
+    return;
   }
 };
 
@@ -37,14 +75,10 @@ const reviewReducer = (state = {}, action) => {
         reviews[review.id] = review;
       });
       return { ...reviews };
-    case GET_REVIEW:
-      return state;
-    case ADD_REVIEW:
-      return state;
-    case EDIT_REVIEW:
-      return state;
     case DELETE_REVIEW:
-      return state;
+      const deleteReviews = { ...state };
+      delete deleteReviews[action.payload];
+      return deleteReviews;
     default:
       return state;
   }

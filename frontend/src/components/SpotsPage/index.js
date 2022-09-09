@@ -4,8 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect, NavLink } from "react-router-dom";
 import "./Spots.css";
 import { getSpots } from "../../store/spots";
-import FormButtons from "./FormButton";
-import SpotsForm from "./SpotsForm";
 
 const SpotsPage = () => {
   const dispatch = useDispatch();

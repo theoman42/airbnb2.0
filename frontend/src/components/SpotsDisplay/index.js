@@ -3,8 +3,10 @@ import { useParams, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { deleteOwnerSpot, getOneSpot, getSpots } from "../../store/spots";
-import { getReviewsfromSpotId } from "../../store/reviews";
+import { getReviewsfromSpotId, deleteOneReview } from "../../store/reviews";
 import EditSpotModal from "../EditSpotModal";
+import EditReviewModal from "../EditReviewModal";
+import AddReviewModal from "../AddReviewModal";
 
 const SpotsDisplay = () => {
   const dispatch = useDispatch();
@@ -13,9 +15,11 @@ const SpotsDisplay = () => {
   id = parseInt(id);
   const [isLoaded, setIsLoaded] = useState(false);
   const [isOwned, setIsOwned] = useState(false);
-  const [isReviewOwned, setisReviewOwned] = useState(false);
+  const [noReviews, setNoReviews] = useState(false);
+
   const spot = useSelector((state) => state.spots.currentSpot);
   const user = useSelector((state) => state.session.user);
+
   const reviews = Object.values(useSelector((state) => state.reviews));
 
   const handleDeleteSpot = () => {
@@ -24,18 +28,18 @@ const SpotsDisplay = () => {
     history.push("/");
   };
 
-  const handleEditReview = () => {
-    dispatch();
-  };
-
-  const handleDeleteReview = () => {
-    dispatch();
+  const handleDeleteReview = (reviewId) => {
+    dispatch(deleteOneReview(reviewId));
   };
 
   useEffect(() => {
     dispatch(getOneSpot(id)).then(() => setIsLoaded(true));
-    dispatch(getReviewsfromSpotId(id));
-  }, [id, dispatch]);
+    dispatch(getReviewsfromSpotId(id)).catch(async (res) => {
+      if (res.status === 500) {
+        setNoReviews(true);
+      }
+    });
+  }, [dispatch]);
 
   useEffect(() => {
     if (spot && user) {
@@ -75,20 +79,26 @@ const SpotsDisplay = () => {
             </div>
             <div className="review-container">
               <h3>Reviews</h3>
-              {reviews.map((review) => {
-                return (
-                  <div key={review.id} className="single-review-container">
-                    <span>{`${review.User.firstName} ${review.User.lastName}`}</span>
-                    <p>{`${review.review}`}</p>
-                    {review.User.id === user?.id && (
-                      <>
-                        <button onClick={handleEditReview}> Edit </button>
-                        <button onClick={handleDeleteReview}> Delete </button>
-                      </>
-                    )}
-                  </div>
-                );
-              })}
+              <AddReviewModal spotId={id} />
+              {noReviews &&
+                reviews.map((review) => {
+                  return (
+                    <div key={review.id} className="single-review-container">
+                      <span>{`${review.User.firstName} ${review.User.lastName}`}</span>
+                      <div className="review-text-wrapper">
+                        <p>{`${review.review}`}</p>
+                      </div>
+                      {review.User.id === user?.id && (
+                        <>
+                          <EditReviewModal spotId={id} reviewId={review.id} />
+                          <button onClick={() => handleDeleteReview(review.id)}>
+                            Delete
+                          </button>
+                        </>
+                      )}
+                    </div>
+                  );
+                })}
             </div>
           </div>
         </>
