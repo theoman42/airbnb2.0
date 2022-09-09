@@ -172,7 +172,9 @@ router.get("/:spotId/reviews", async (req, res) => {
   });
   if (!spotExist) {
     const err = new Error("Spot couldn't be found");
+    err.errors = ["Spot couldn't be found"];
     err.status = 404;
+    next(err);
     throw err;
   }
 
@@ -197,7 +199,7 @@ router.get("/:spotId/reviews", async (req, res) => {
     ],
   });
   if (!reviews.length) {
-    const err = new ERROR("Spot couldn't be found");
+    const err = new Error("Spot couldn't be found");
     err.status = 404;
     throw err;
   }
@@ -209,7 +211,7 @@ router.post(
   "/:spotId/reviews",
   requireAuth,
   validateReviewBody,
-  async (req, res) => {
+  async (req, res, next) => {
     let { spotId } = req.params;
     const { user } = req;
     const { review, stars } = req.body;
@@ -228,6 +230,14 @@ router.post(
       },
     });
 
+    if (user.id === spotExist.ownerId) {
+      const err = new Error("Can't review your own Spot!");
+      err.errors = ["Can't review your own spot!"];
+      err.status = 403;
+      next(err);
+      throw err;
+    }
+
     if (!spotExist) {
       const err = new Error("Spot couldn't be found");
       err.status = 404;
@@ -235,7 +245,9 @@ router.post(
     }
     if (reviewExist) {
       const err = new Error("User already has a review for this spot");
+      err.errors = ["User already has a review for this spot"];
       err.status = 403;
+      next(err);
       throw err;
     }
 
