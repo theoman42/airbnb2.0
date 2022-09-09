@@ -5,14 +5,13 @@ const handleValidationErrors = (req, _res, next) => {
   const validationErrors = validationResult(req);
   let errorObj = {};
   if (!validationErrors.isEmpty()) {
-    const errors = validationErrors.array().forEach((error) => {
-      errorObj[error.param] = error.msg;
-    });
+    const errors = validationErrors.array().map((error) => error.msg);
 
     const err = Error("Validation Error");
-    err.errors = errorObj;
+    err.errors = errors;
     err.status = 400;
     err.title = "Validation Error";
+
     next(err);
   }
   next();

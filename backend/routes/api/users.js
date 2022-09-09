@@ -45,10 +45,13 @@ router.post("/login", validateLogin, async (req, res, next) => {
     err.status = 401;
     err.title = "Invalid credentials";
     err.errors = ["The provided crendentials were invalid."];
-    res.json({
-      message: err.message,
-      statusCode: err.status,
-    });
+
+    next(err);
+    // res.json({
+    //   errors: err.errors,
+    //   message: err.message,
+    //   statusCode: err.status,
+    // });
   }
 
   const cookie = await setTokenCookie(res, user);
@@ -72,7 +75,8 @@ router.post("/signup", validateSignup, async (req, res, next) => {
   if (userExist) {
     const err = new Error("User already exists");
     err.status = 403;
-    err.errors = { email: "User with that email already exists" };
+    err.errors = ["User with that email already exists"];
+
     next(err);
   }
   //
