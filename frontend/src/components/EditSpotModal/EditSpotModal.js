@@ -15,6 +15,7 @@ const SpotsForm = (props) => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
+  const [errors, setErrors] = useState([]);
 
   const updateAddress = (e) => setAddress(e.target.value);
   const updateCity = (e) => setCity(e.target.value);
@@ -41,14 +42,16 @@ const SpotsForm = (props) => {
       price,
     };
 
-    let newSpot = await dispatch(editOwnerSpot(payload, props.id));
+    let newSpot = await dispatch(editOwnerSpot(payload, props.id)).catch(
+      async (res) => {
+        const data = await res.json();
+        if (data && data.errors) setErrors(data.errors);
+      }
+    );
     if (newSpot) {
       history.push(`/spots/${newSpot.id}`);
+      props.onClose();
     }
-  };
-
-  const handleCancel = (e) => {
-    e.preventDefault();
   };
 
   return (
@@ -119,9 +122,6 @@ const SpotsForm = (props) => {
       />
       <button type="submit" onClick={handleSubmit}>
         Submit Form
-      </button>
-      <button type="button" onClick={handleCancel}>
-        Cancel
       </button>
     </div>
   );

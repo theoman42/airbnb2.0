@@ -17,7 +17,11 @@ const EditReviewModal = (props) => {
       )}
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          <ReviewForm spotId={props.spotId} reviewId={props.reviewId} />
+          <ReviewForm
+            onClose={() => setShowModal(false)}
+            spotId={props.spotId}
+            reviewId={props.reviewId}
+          />
         </Modal>
       )}
     </>

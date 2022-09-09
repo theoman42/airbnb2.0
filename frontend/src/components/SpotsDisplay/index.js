@@ -15,11 +15,10 @@ const SpotsDisplay = () => {
   id = parseInt(id);
   const [isLoaded, setIsLoaded] = useState(false);
   const [isOwned, setIsOwned] = useState(false);
-  const [noReviews, setNoReviews] = useState(false);
+  const [noReviews, setNoReviews] = useState(true);
 
   const spot = useSelector((state) => state.spots.currentSpot);
   const user = useSelector((state) => state.session.user);
-
   const reviews = Object.values(useSelector((state) => state.reviews));
 
   const handleDeleteSpot = () => {
@@ -34,9 +33,10 @@ const SpotsDisplay = () => {
 
   useEffect(() => {
     dispatch(getOneSpot(id)).then(() => setIsLoaded(true));
+    setNoReviews(true);
     dispatch(getReviewsfromSpotId(id)).catch(async (res) => {
       if (res.status === 500) {
-        setNoReviews(true);
+        setNoReviews(false);
       }
     });
   }, [dispatch]);

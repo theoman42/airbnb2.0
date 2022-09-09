@@ -7,11 +7,12 @@ const ReviewForm = (props) => {
   const dispatch = useDispatch();
   const [review, setReview] = useState("");
   const [stars, setStars] = useState(5);
+  const [errors, setErrors] = useState([]);
 
   //const updateReview = (e) => setReview(e.target.value);
   const updateStars = (e) => setStars(e.target.value);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const payload = {
@@ -19,16 +20,26 @@ const ReviewForm = (props) => {
       stars,
     };
 
-    dispatch(addReview(payload, props.spotId));
-  };
-
-  const handleCancel = (e) => {
-    e.preventDefault();
+    let newReview = await dispatch(addReview(payload, props.spotId)).catch(
+      async (res) => {
+        const data = await res.json();
+        if (data && data.errors) setErrors(data.errors);
+      }
+    );
+    console.log(newReview);
+    if (newReview) {
+      props.onClose();
+    }
   };
 
   return (
     <div>
       <form onSubmit={handleSubmit} className="review-text-wrapper">
+        <ul>
+          {errors.map((error, idx) => (
+            <li key={idx}>{error}</li>
+          ))}
+        </ul>
         <input
           type="text"
           placeholder="Review"
@@ -48,9 +59,6 @@ const ReviewForm = (props) => {
           className=""
         />
         <button type="submit">Submit</button>
-        <button type="button" onClick={handleCancel}>
-          Cancel
-        </button>
       </form>
     </div>
   );

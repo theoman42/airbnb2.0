@@ -49,7 +49,6 @@ const SpotsForm = (props) => {
 
     if (newSpot) {
       history.push(`/spot/${newSpot.id}`);
-      //dispatch(getOneSpot(newSpot.id));
       props.onClose();
     }
   };

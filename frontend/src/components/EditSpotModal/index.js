@@ -17,7 +17,7 @@ const EditSpotModal = (props) => {
       )}
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          <SpotsForm id={props.id} />
+          <SpotsForm onClose={() => setShowModal(false)} id={props.id} />
         </Modal>
       )}
     </>

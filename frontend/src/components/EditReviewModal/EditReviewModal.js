@@ -7,6 +7,7 @@ const ReviewForm = (props) => {
   const dispatch = useDispatch();
   const [review, setReview] = useState("");
   const [stars, setStars] = useState(5);
+  const [errors, setErrors] = useState([]);
 
   //const updateReview = (e) => setReview(e.target.value);
   const updateStars = (e) => setStars(e.target.value);
@@ -19,40 +20,47 @@ const ReviewForm = (props) => {
       stars,
     };
 
-    await dispatch(updateReview(payload, props.spotId, props.reviewId));
-  };
-
-  const handleCancel = (e) => {
-    e.preventDefault();
+    let updatedReview = await dispatch(
+      updateReview(payload, props.spotId, props.reviewId)
+    ).catch(async (res) => {
+      const data = await res.json();
+      if (data && data.errors) setErrors(data.errors);
+    });
+    if (updatedReview) {
+      props.onClose();
+    }
   };
 
   return (
     <div>
-      <form onSubmit={handleSubmit} className="review-text-wrapper"></form>
-      <input
-        type="text"
-        placeholder="Review"
-        required
-        value={review}
-        onChange={(e) => setReview(e.target.value)}
-      />
-      <label htmlFor="stars">{stars}</label>
-      <input
-        id="stars"
-        type="range"
-        value={stars}
-        min="1"
-        max="5"
-        step="1"
-        onChange={updateStars}
-        className=""
-      />
-      <button type="submit" onClick={handleSubmit}>
-        Submit
-      </button>
-      <button type="button" onClick={handleCancel}>
-        Cancel
-      </button>
+      <form onSubmit={handleSubmit} className="review-text-wrapper">
+        <ul>
+          {errors.map((error, idx) => (
+            <li key={idx}>{error}</li>
+          ))}
+        </ul>
+        <input
+          type="text"
+          placeholder="Review"
+          required
+          value={review}
+          onChange={(e) => setReview(e.target.value)}
+        />
+        <label htmlFor="stars">{stars}</label>
+        <input
+          id="stars"
+          type="range"
+          value={stars}
+          min="1"
+          max="5"
+          step="1"
+          onChange={updateStars}
+          className=""
+        />
+        <button type="submit" onClick={handleSubmit}>
+          Submit
+        </button>
+      </form>
     </div>
   );
 };

@@ -23,7 +23,7 @@ export const getReviewsfromSpotId = (spotId) => async (dispatch) => {
   if (res.ok) {
     const allReviews = await res.json();
     dispatch(load(allReviews));
-    return;
+    return allReviews;
   }
 };
 
@@ -38,7 +38,7 @@ export const addReview = (review, spotId) => async (dispatch) => {
 
   if (res.ok) {
     dispatch(getReviewsfromSpotId(spotId));
-    return;
+    return res.json();
   }
 };
 
@@ -53,7 +53,7 @@ export const updateReview = (review, spotId, reviewId) => async (dispatch) => {
 
   if (res.ok) {
     dispatch(getReviewsfromSpotId(spotId));
-    return;
+    return res.json();
   }
 };
 
@@ -63,7 +63,7 @@ export const deleteOneReview = (reviewId) => async (dispatch) => {
   });
   if (res.ok) {
     dispatch(deleteReview(reviewId));
-    return;
+    return res.json();
   }
 };
 
