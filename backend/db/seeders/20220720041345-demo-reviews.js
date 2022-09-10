@@ -9,7 +9,7 @@ module.exports = {
           userId: 1,
           spotId: 2,
           review:
-            "Beautiful house with a cool doc. I recommend coming up when the lake.os full.",
+            "Beautiful house with a cool doc. I recommend coming up when the lake is full.",
           stars: 4,
         },
         {
