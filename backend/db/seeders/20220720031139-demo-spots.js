@@ -15,6 +15,8 @@ module.exports = {
         description:
           "A home once enjoyed by the homies, now available to the homies,",
         price: 50.93,
+        previewImage:
+          "https://airbnb-project.s3.us-west-2.amazonaws.com/Spot+1/0425a5a1-394e-4371-8bf8-506016d39fd6.webp",
       },
       {
         ownerId: 2,
@@ -28,6 +30,8 @@ module.exports = {
         description:
           "Also a home once enjoyed by the homies, now available to the homies,",
         price: 55.93,
+        previewImage:
+          "https://airbnb-project.s3.us-west-2.amazonaws.com/Spot+2/0829d033-7374-4858-9450-28b53fdf4fb7.webp",
       },
       {
         ownerId: 3,
@@ -41,6 +45,8 @@ module.exports = {
         description:
           "3rd home once enjoyed by the homies, now available to the homies,",
         price: 25.93,
+        previewImage:
+          "https://airbnb-project.s3.us-west-2.amazonaws.com/Spot+3/67355412-eee4-48bd-9151-1e31e49200d7.webp",
       },
     ]);
   },
