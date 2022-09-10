@@ -38,6 +38,8 @@ function ProfileButton({ user }) {
   if (sessionUser) {
     sessionLinks = (
       <>
+        <div>{`${sessionUser.firstName} ${sessionUser.lastName}`}</div>
+        <div>{`${sessionUser.email}`}</div>
         <button onClick={logout}>Log Out</button>
       </>
     );

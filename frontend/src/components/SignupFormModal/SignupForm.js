@@ -15,18 +15,26 @@ function SignupFormPage(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const payload = {
+      firstName,
+      lastName,
+      email,
+      password,
+    };
+
     if (password !== confirmPassword) {
       return setErrors([
         "Confirm Password field must be the same as the Password field",
       ]);
     } else {
       setErrors([]);
-      let newUser = await dispatch(
-        sessionActions.signup({ firstName, lastName, email, password })
-      ).catch(async (res) => {
-        const data = await res.json();
-        if (data && data.errors) setErrors(data.errors);
-      });
+      let newUser = await dispatch(sessionActions.signup(payload)).catch(
+        async (res) => {
+          const data = await res.json();
+          if (data && data.errors) setErrors(data.errors);
+        }
+      );
       if (newUser) props.onClose();
     }
   };
