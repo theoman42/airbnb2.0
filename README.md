@@ -35,7 +35,7 @@ Explore my AirBnB Clone Site: [ Airbnb Clone ](https://theo-airbnb-fullstack.her
 
 The Navigation bar includes a logo, a demo login button, and a profile drop down menu. The drop down menu includes a login and signup button when logged out. On signin, this portion will display user information as well as a logout button. When loggged in, the demo button will switch to an add spot button.
 
-![Uploading Screen Shot 2022-09-10 at 3.29.46 PM.png…]()
+![](./images/navigator.png)
 
 <br/>
 <br/>
@@ -44,7 +44,7 @@ The Navigation bar includes a logo, a demo login button, and a profile drop down
 
 The landing page displays all available spots as well as their Name, Price, and location. Each individual spot will link you to their respective spot pages.
 
-![Uploading Screen Shot 2022-09-10 at 3.31.18 PM.png…]()
+![](./images/splashpage.png)
 
 <br/>
 <br/>
@@ -53,7 +53,7 @@ The landing page displays all available spots as well as their Name, Price, and 
 
 This page displays a title, description, image, and reviews for a given spot. If the user is the owner of the spot and is logged in, the user will have the ability to edit and delete the spot from this page. The owner of the spot may not leave a review on their own spot. Owners of a review for a specific spot will be able to delete and edit their review for a given spot. No more than one review per spot!
 
-![Uploading Screen Shot 2022-09-10 at 3.30.40 PM.png…]()
+![](./images/spotspage.png)
 
 <br/>
 <br/>
