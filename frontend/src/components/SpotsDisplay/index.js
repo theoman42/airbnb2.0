@@ -42,9 +42,7 @@ const SpotsDisplay = (props) => {
     }
   }, [spot]);
 
-  useEffect(() => {
-    console.log("one");
-  }, [dispatch]);
+  useEffect(() => {}, [dispatch]);
 
   useEffect(() => {
     dispatch(getOneSpot(id)).then(() => setIsLoaded(true));
@@ -63,8 +61,6 @@ const SpotsDisplay = (props) => {
       setIsOwned(false);
     }
   }, [user, spot]);
-
-  console.log(isOwned);
 
   return (
     <main className="page-container">
