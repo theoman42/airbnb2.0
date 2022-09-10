@@ -23,7 +23,7 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: 2.0em;
-  grid-gap: 0;
+  row-gap: 10px;
   color: black;
   padding: 3px;
   margin-top: 5px;
