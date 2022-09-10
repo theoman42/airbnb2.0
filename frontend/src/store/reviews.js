@@ -18,7 +18,7 @@ export const deleteReview = (review) => {
 };
 
 export const getReviewsfromSpotId = (spotId) => async (dispatch) => {
-  const res = await csrfFetch(`/spots/${spotId}/reviews`).catch(async (res) => {
+  const res = await csrfFetch(`/api/spots/${spotId}/reviews`).catch(async (res) => {
     dispatch(load({ reviews: [] }));
   });
   if (res) {
@@ -29,7 +29,7 @@ export const getReviewsfromSpotId = (spotId) => async (dispatch) => {
 };
 
 export const addReview = (review, spotId) => async (dispatch) => {
-  const res = await csrfFetch(`/spots/${spotId}/reviews`, {
+  const res = await csrfFetch(`/api/spots/${spotId}/reviews`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -44,7 +44,7 @@ export const addReview = (review, spotId) => async (dispatch) => {
 };
 
 export const updateReview = (review, spotId, reviewId) => async (dispatch) => {
-  const res = await csrfFetch(`/spots/${spotId}/reviews/${reviewId}`, {
+  const res = await csrfFetch(`/api/spots/${spotId}/reviews/${reviewId}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -59,7 +59,7 @@ export const updateReview = (review, spotId, reviewId) => async (dispatch) => {
 };
 
 export const deleteOneReview = (reviewId) => async (dispatch) => {
-  const res = await csrfFetch(`/reviews/${reviewId}`, {
+  const res = await csrfFetch(`/api/reviews/${reviewId}`, {
     method: "DELETE",
   });
   if (res.ok) {

@@ -1,10 +1,9 @@
 // backend/routes/index.js
 const express = require("express");
 const router = express.Router();
-const { restoreUser } = require("../utils/auth");
 const apiRouter = require("./api");
 
-router.use("/", apiRouter);
+router.use("/api", apiRouter);
 
 // Add a XSRF-TOKEN cookie
 if (process.env.NODE_ENV !== "production") {

@@ -42,7 +42,7 @@ export const deleteSpot = (id) => {
 };
 
 export const getSpots = () => async (dispatch) => {
-  const res = await csrfFetch("/spots");
+  const res = await csrfFetch("/api/spots");
 
   if (res.ok) {
     const allSpots = await res.json();
@@ -51,7 +51,7 @@ export const getSpots = () => async (dispatch) => {
 };
 
 export const getOneSpot = (id) => async (dispatch) => {
-  const res = await csrfFetch(`/spots/${id}`);
+  const res = await csrfFetch(`/api/spots/${id}`);
 
   if (res.ok) {
     const spot = await res.json();
@@ -61,7 +61,7 @@ export const getOneSpot = (id) => async (dispatch) => {
 };
 
 export const addSpot = (payload) => async (dispatch) => {
-  const res = await csrfFetch("/spots", {
+  const res = await csrfFetch("/api/spots", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -77,7 +77,7 @@ export const addSpot = (payload) => async (dispatch) => {
 };
 
 export const editOwnerSpot = (payload, id) => async (dispatch) => {
-  const res = await csrfFetch(`/spots/${id}`, {
+  const res = await csrfFetch(`/api/spots/${id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -93,7 +93,7 @@ export const editOwnerSpot = (payload, id) => async (dispatch) => {
 };
 
 export const deleteOwnerSpot = (id) => async (dispatch) => {
-  const res = await csrfFetch(`/spots/${id}`, {
+  const res = await csrfFetch(`/api/spots/${id}`, {
     method: "DELETE",
   });
 

@@ -18,7 +18,7 @@ export const rmUser = () => {
 
 export const login = (payload) => async (dispatch) => {
   const { email, password } = payload;
-  const res = await csrfFetch("/users/login", {
+  const res = await csrfFetch("/api/users/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -37,7 +37,7 @@ export const login = (payload) => async (dispatch) => {
 };
 
 export const restoreUser = () => async (dispatch) => {
-  const response = await csrfFetch("/restore");
+  const response = await csrfFetch("/api/restore");
   const data = await response.json();
   dispatch(setUser(data.user));
   return response;
@@ -45,7 +45,7 @@ export const restoreUser = () => async (dispatch) => {
 
 export const signup = (user) => async (dispatch) => {
   const { email, password, firstName, lastName } = user;
-  const response = await csrfFetch("/users/signup", {
+  const response = await csrfFetch("/api/users/signup", {
     method: "POST",
     body: JSON.stringify({
       email,
@@ -60,7 +60,7 @@ export const signup = (user) => async (dispatch) => {
 };
 
 export const logout = () => async (dispatch) => {
-  const response = await csrfFetch("/users/logout", {
+  const response = await csrfFetch("/api/users/logout", {
     method: "DELETE",
   });
   dispatch(rmUser());

@@ -839,7 +839,7 @@ Delete an existing review.
 - Request
 
   - Method: Delete
-  - URL: /spots/:spotId/reviews/:reviewId
+  - URL: reviews/:reviewId
   - Body: none
 
 - Successful Response
