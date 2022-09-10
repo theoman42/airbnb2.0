@@ -13,7 +13,7 @@ module.exports = {
         lng: -77.0364,
         name: "Entire vacation home hosted by Sherrie And Chris",
         description:
-          "This is a beautiful beachfront, 3 bedroom cozy family cabin/home located in Marla Bay Zephyr Cove. The bonus room is only available in the Summer months as there is no heat in this room. Breathtaking views of Lake Tahoe from the living room, bonus room, kitchen and master bedroom! ",
+          "This is a beautiful beachfront, 3 bedroom cozy family cabin/home located in Marla Bay Zephyr Cove.",
         price: 50.93,
         previewImage:
           "https://airbnb-project.s3.us-west-2.amazonaws.com/Spot+1/0425a5a1-394e-4371-8bf8-506016d39fd6.webp",
@@ -43,7 +43,7 @@ module.exports = {
         lng: -29.0364,
         name: "Rubicon Bay Lake Front - Private Dock, Buoy, Playground and Sandy Beach",
         description:
-          "IMPORTANT - All Rates and Cleaning Fee Include all local Occupancy Taxes. A Damage Waiver Fee is also included. The DWF covers you for up to $3000 of accidental damage during your stay. Contact us directly if a traditional Security Deposit is preferred. NO ADDITIONAL CHARGES will be applied upon booking.",
+          "IMPORTANT - All Rates and Cleaning Fee Include all local Occupancy Taxes. A Damage Waiver Fee is also included.",
         price: 25.93,
         previewImage:
           "https://airbnb-project.s3.us-west-2.amazonaws.com/Spot+3/67355412-eee4-48bd-9151-1e31e49200d7.webp",
