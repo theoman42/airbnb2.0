@@ -11,12 +11,10 @@ module.exports = {
         country: "USA",
         lat: 38.8951,
         lng: -77.0364,
-        name: "Entire vacation home hosted by Sherrie And Chris",
+        name: "Homey Home for the Homies",
         description:
-          "This is a beautiful beachfront, 3 bedroom cozy family cabin/home located in Marla Bay Zephyr Cove.",
+          "A home once enjoyed by the homies, now available to the homies.",
         price: 50.93,
-        previewImage:
-          "https://airbnb-project.s3.us-west-2.amazonaws.com/Spot+1/0425a5a1-394e-4371-8bf8-506016d39fd6.webp",
       },
       {
         ownerId: 2,
@@ -26,9 +24,9 @@ module.exports = {
         country: "USA",
         lat: 41.8951,
         lng: -79.0364,
-        name: "A Homey Home for the Homies",
+        name: "2nd Homey Home for the Homies",
         description:
-          "You have found your ultimate romantic getaway! Peaceful and serene, be at one with nature and the wildlife on the lake.",
+          "Also a home once enjoyed by the homies, now available to the homies.",
         price: 55.93,
         previewImage:
           "https://airbnb-project.s3.us-west-2.amazonaws.com/Spot+2/0829d033-7374-4858-9450-28b53fdf4fb7.webp",
@@ -41,9 +39,9 @@ module.exports = {
         country: "USA",
         lat: 51.8251,
         lng: -29.0364,
-        name: "Rubicon Bay Lake Front - Private Dock, Buoy, Playground and Sandy Beach",
+        name: "3rd Homey Home for the Homies",
         description:
-          "IMPORTANT - All Rates and Cleaning Fee Include all local Occupancy Taxes. A Damage Waiver Fee is also included.",
+          "3rd home once enjoyed by the homies, now available to the homies.",
         price: 25.93,
         previewImage:
           "https://airbnb-project.s3.us-west-2.amazonaws.com/Spot+3/67355412-eee4-48bd-9151-1e31e49200d7.webp",
