@@ -58,7 +58,9 @@ const ReviewForm = (props) => {
           onChange={updateStars}
           className=""
         />
-        <button type="submit">Submit</button>
+        <button className="same-button" type="submit">
+          Submit
+        </button>
       </form>
     </div>
   );

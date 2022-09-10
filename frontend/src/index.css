@@ -2,3 +2,18 @@
   padding-left: 30px;
   padding-right: 30px;
 }
+
+.same-button {
+  background-color: white;
+  border: none;
+  border-radius: 21px;
+  transition: all .2s ease;
+  padding: 5px 20px;
+  border: 1px solid black;
+  cursor: crosshair;
+}
+
+.same-button:hover {
+  color: #E25959;
+  border: 1px solid #E25959;
+}

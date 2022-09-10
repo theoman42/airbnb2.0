@@ -124,7 +124,7 @@ const SpotsForm = (props) => {
           value={price}
           onChange={updatePrice}
         />
-        <button type="submit" onClick={handleSubmit}>
+        <button className="same-button" type="submit" onClick={handleSubmit}>
           Submit Form
         </button>
       </form>

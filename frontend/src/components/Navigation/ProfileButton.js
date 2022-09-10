@@ -40,7 +40,9 @@ function ProfileButton({ user }) {
       <>
         <div>{`${sessionUser.firstName} ${sessionUser.lastName}`}</div>
         <div>{`${sessionUser.email}`}</div>
-        <button onClick={logout}>Log Out</button>
+        <button className="dropdown-buttons" onClick={logout}>
+          Log Out
+        </button>
       </>
     );
   } else {

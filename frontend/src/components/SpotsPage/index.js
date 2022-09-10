@@ -23,11 +23,19 @@ const SpotsPage = () => {
                 to={`/spots/${spot.id}`}
                 className="grid-item"
               >
-                <img src="google.com/images" alt="airbnb-spot" />
-                <div className="spot-descriptions-grid">
-                  <div className="description-item-1">{`${spot.city}, ${spot.country}`}</div>
-                  <div className="description-item-2">{`$${spot.price} night`}</div>
-                  <div className="description-item-3">{`Stars`}</div>
+                <div>
+                  <div className="main-image-wrapper">
+                    <img
+                      className="main-page-spot-images"
+                      src={spot.previewImage}
+                      alt="airbnb-spot"
+                    />
+                  </div>
+                  <div className="spot-descriptions-grid">
+                    <div className="description-item-1">{`${spot.name}`}</div>
+                    <div className="description-item-2">{`$${spot.price} night`}</div>
+                    <div className="description-item-3">{`${spot.city}, ${spot.country}`}</div>
+                  </div>
                 </div>
               </NavLink>
             );

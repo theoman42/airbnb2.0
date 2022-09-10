@@ -57,7 +57,7 @@ const ReviewForm = (props) => {
           onChange={updateStars}
           className=""
         />
-        <button type="submit" onClick={handleSubmit}>
+        <button className="same-button" type="submit" onClick={handleSubmit}>
           Submit
         </button>
       </form>

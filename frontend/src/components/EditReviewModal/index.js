@@ -11,7 +11,7 @@ const EditReviewModal = (props) => {
   return (
     <>
       {sessionUser && (
-        <button className="add-edit-button" onClick={() => setShowModal(true)}>
+        <button className="dropdown-buttons" onClick={() => setShowModal(true)}>
           Edit
         </button>
       )}

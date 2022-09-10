@@ -11,7 +11,7 @@ const ReviewTitleComponent = (props) => {
     reviews.forEach((review) => {
       sum = sum + review.stars;
     });
-    return sum ? sum / count : 0;
+    return sum ? sum / count : `New`;
   };
 
   useEffect(() => {});
@@ -19,7 +19,7 @@ const ReviewTitleComponent = (props) => {
   return (
     <>
       <div className="avgStars-wrapper">
-        {reviews ? `${avgCalc(reviews)} Stars` : `Leave the First Review!`}
+        {reviews ? ` ${avgCalc(reviews)}★` : `Leave the First Review!`}
       </div>
       <div className="stars-count-wrapper">{`${
         reviews ? reviews.length : 0

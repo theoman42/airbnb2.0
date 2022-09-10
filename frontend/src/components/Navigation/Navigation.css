@@ -4,6 +4,8 @@
 }
 
 .demo-button {
+  margin-right: 10px;
+
   background-color: white;
   border: none;
   border-radius: 21px;
@@ -36,6 +38,21 @@ div.isHidden  {
   box-shadow: 0 5px 6px rgba(0, 0, 0, 0.1);;
 }
 
+.dropdown-buttons {
+  margin-right: 10px;
+  background-color: transparent;
+  border: none;
+  border-radius: 21px;
+  transition: all .2s ease;
+  padding: 5px 20px;
+  border: 1px solid black;
+}
+
+.dropdown-buttons:hover {
+  color: #E25959;
+  border: 1px solid #E25959;
+}
+
 
 .dropdown-wrapper {
   direction: rtl;
@@ -52,6 +69,8 @@ div.isHidden  {
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   position: absolute;
   z-index: 1;
+  gap: 1.5rem;
+  padding: 10px;
 }
 
 .bars-icon {
@@ -69,6 +88,7 @@ div.isHidden  {
 }
 
 .nav-container {
+  z-index: 10000;
   display: flex;
   justify-content: space-between;
   position: sticky;

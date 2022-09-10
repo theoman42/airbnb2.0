@@ -87,12 +87,18 @@ const SpotsDisplay = (props) => {
               </div>
             </div>
             <div className="gallery-wrapper">
-              hi
-              {/* {spot.images.map((spot) => {
-                    return <img src="" alt="images" />;
-                  })} */}
+              {spot.images.map((image) => {
+                return (
+                  <img
+                    className="current-spot-image"
+                    src={image.url}
+                    alt="images"
+                  />
+                );
+              })}
             </div>
             <div className="description-wrapper">
+              <h3>Decription</h3>
               <p>{spot.description}</p>
             </div>
             <div className="review-container">
@@ -101,14 +107,17 @@ const SpotsDisplay = (props) => {
               {reviews.map((review) => {
                 return (
                   <div key={review.id} className="single-review-container">
-                    <span>{`${review.User.firstName} ${review.User.lastName}`}</span>
+                    <span>{`${review.User.firstName} ${review.User.lastName}   ${review.stars}★`}</span>
                     <div className="review-text-wrapper">
                       <p>{`${review.review}`}</p>
                     </div>
                     {review.User.id === user?.id && (
                       <>
                         <EditReviewModal spotId={id} reviewId={review.id} />
-                        <button onClick={() => handleDeleteReview(review.id)}>
+                        <button
+                          className="dropdown-buttons"
+                          onClick={() => handleDeleteReview(review.id)}
+                        >
                           Delete
                         </button>
                       </>
