@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { NavLink, useHistory } from "react-router-dom";
+import React, { useState, useEffect, Link } from "react";
+import { NavLink, Redirect, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import * as sessionActions from "../../store/session";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFaceSmile, faBars } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faFaceSmile } from "@fortawesome/free-solid-svg-icons";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
+import githubImage from "../../images/github-logo.png";
+import linkedin from "../../images/linkedin-112.png";
 
 function ProfileButton({ user }) {
   const sessionUser = useSelector((state) => state.session.user);
@@ -54,6 +56,17 @@ function ProfileButton({ user }) {
     );
   }
 
+  let aboutLinks = (
+    <div className="logo-container-about">
+      <a href="https://github.com/theoman42/airbnb2.0">
+        <img src={githubImage} alt="github logo" />
+      </a>
+      <a href="https://www.linkedin.com/in/theofandrich/">
+        <img src={linkedin} alt="github logo" />
+      </a>
+    </div>
+  );
+
   return (
     <>
       <button className="profile-button" onClick={openMenu}>
@@ -61,20 +74,13 @@ function ProfileButton({ user }) {
         <FontAwesomeIcon className="user-icon" icon={faFaceSmile} />
       </button>
       <div className="dropdown-wrapper">
-        <div className={`profile-dropdown ${showMenu}`}>{sessionLinks}</div>
+        <div className={`profile-dropdown ${showMenu}`}>
+          {sessionLinks}
+          {aboutLinks}
+        </div>
       </div>
     </>
   );
 }
 
 export default ProfileButton;
-
-// (
-//   <ul className="profile-dropdown">
-//     <li>{user.firstName}</li>
-//     <li>{user.email}</li>
-//     <li>
-//       <button onClick={logout}>Log Out</button>
-//     </li>
-//   </ul>
-// )
