@@ -7,6 +7,45 @@ Explore my AirBnB Clone Site: [ Airbnb Clone ](https://theo-airbnb-fullstack.her
 
 <br/>
 
+## Setup:
+
+---
+
+<br/>
+
+1. Clone Locally
+
+```
+git clone https://github.com/theoman42/airbnb2.0.git
+```
+
+<br/>
+
+2. Create a .env file in the backend directory
+
+- PORT= The Port the backend will run on.
+- DB_FILE= Location of the database file
+- JWT_SECRET= JWT Secret Key
+- JWT_EXPIRES_IN= Period JWT Key is active before expiry
+
+<br/>
+
+3. Open up your project in VScode or any development environment and run the following command in the frontend, backend and the root directoy.
+
+```
+npm install
+```
+
+<br/>
+
+4. Once all dependencies are loaded, start both the backend and front end servers with the following command:
+
+```
+npm start
+```
+
+<br/>
+
 ## Technologies:
 
 ---
