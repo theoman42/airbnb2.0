@@ -5,6 +5,7 @@ import { getReviewsfromSpotId, updateReview } from "../../store/reviews";
 
 const ReviewForm = (props) => {
   const dispatch = useDispatch();
+
   const [review, setReview] = useState("");
   const [stars, setStars] = useState(5);
   const [errors, setErrors] = useState([]);
