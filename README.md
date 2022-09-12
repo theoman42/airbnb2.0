@@ -15,6 +15,8 @@ Explore my AirBnB Clone Site: [ Airbnb Clone ](https://theo-airbnb-fullstack.her
 
 1. Clone Locally
 
+<br/>
+
 ```
 git clone https://github.com/theoman42/airbnb2.0.git
 ```
@@ -23,6 +25,8 @@ git clone https://github.com/theoman42/airbnb2.0.git
 
 2. Create a .env file in the backend directory
 
+<br/>
+
 - PORT= The Port the backend will run on.
 - DB_FILE= Location of the database file
 - JWT_SECRET= JWT Secret Key
@@ -30,7 +34,9 @@ git clone https://github.com/theoman42/airbnb2.0.git
 
 <br/>
 
-3. Open up your project in VScode or any development environment and run the following command in the frontend, backend and the root directoy.
+3. Open up your project in VScode or any development environment and run the following command in the frontend, backend and the root directoy in order to load all dependencies.
+
+<br/>
 
 ```
 npm install
@@ -38,7 +44,23 @@ npm install
 
 <br/>
 
-4. Once all dependencies are loaded, start both the backend and front end servers with the following command:
+4. Load models and seed the database.
+
+<br/>
+
+```
+dotenv npx sequelize db:migrate
+```
+
+```
+dotenv npx sequelize db:seed:all
+```
+
+<br/>
+
+5. Once all dependencies are loaded, start both the backend and front end servers with the following command:
+
+<br/>
 
 ```
 npm start
