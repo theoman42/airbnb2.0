@@ -82,7 +82,6 @@ npm start
 - Sequelize
 - Sqlite3
 - Heroku
-- AWS
 
 <br/>
 
